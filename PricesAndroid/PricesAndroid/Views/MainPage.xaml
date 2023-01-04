@@ -131,7 +131,7 @@
                 <Editor HeightRequest="120"
                         FontSize="16"/>
             </Frame>
-<!--
+            <!--
             <StackLayout Orientation="Horizontal"
                          Margin="0, 0, 0, 20"
                          Padding="87, 0">
