@@ -20,6 +20,7 @@ namespace PricesAndroid
             //Задаем стартовую страницу
             CurrentItem = Estimation;
 
+            Routing.RegisterRoute(nameof(RequestsPage), typeof(RequestsPage));
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(UserProfilePage), typeof(UserProfilePage));
         }

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PricesAndroid.Views.RequestsPage">
+
+    <ScrollView>
+        <StackLayout Padding="21"
+                     Spacing="0"
+                     BackgroundColor="{StaticResource LightThemeBackgroundColor}">
+            <Label Text="Мои заявки" 
+                   FontSize="32" 
+                   FontAttributes="Bold"
+                   Margin="0, 0, 0, 30"
+                   TextColor="{StaticResource LightThemeTextColor}"/>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

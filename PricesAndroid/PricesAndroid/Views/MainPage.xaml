@@ -12,7 +12,7 @@
                    FontAttributes="Bold"
                    Margin="0, 0, 0, 30"
                    TextColor="{StaticResource LightThemeTextColor}"/>
-        
+
             <StackLayout Orientation="Horizontal"
                          Margin="0, 0, 0, 20">
                 <Label Text="*"
@@ -22,10 +22,9 @@
                        FontSize="16"
                        TextColor="{StaticResource HeadlinesColor}"/>
             </StackLayout>
-        
             <Frame BorderColor="{StaticResource BoxesColor}"
                    CornerRadius="5"
-                   Padding="10, 0"
+                   Padding="28, 0"
                    HasShadow="False"
                    HeightRequest="49"
                    Margin="0, 0, 0, 20">
@@ -46,14 +45,14 @@
                        FontSize="16"
                        TextColor="{StaticResource HeadlinesColor}"/>
             </StackLayout>
-
             <Frame BorderColor="{StaticResource BoxesColor}"
                    CornerRadius="5"
-                   Padding="10, 0"
+                   Padding="28, 0"
                    HasShadow="False"
                    HeightRequest="49"
                    Margin="0, 0, 0, 36">
-                <Entry ClearButtonVisibility="WhileEditing"/>
+                <Entry FontSize="16"
+                       ClearButtonVisibility="WhileEditing"/>
             </Frame>
 
             <StackLayout Orientation="Horizontal"
@@ -65,7 +64,6 @@
                        FontSize="16"
                        TextColor="{StaticResource HeadlinesColor}"/>
             </StackLayout>
-
             <Frame BorderColor="{StaticResource BoxesColor}"
                    BackgroundColor="{StaticResource BoxesColor}"
                    CornerRadius="5"
@@ -79,6 +77,8 @@
                        TextColor="#5E5E5E"/> -->
                 
                 <Entry Text="ЕКАТЕРИНБУРГ"
+                       FontSize="16"
+                       TextColor="#5E5E5E"
                        IsReadOnly="True"/>
             </Frame>
 
@@ -91,34 +91,66 @@
                        FontSize="16"
                        TextColor="{StaticResource HeadlinesColor}"/>
             </StackLayout>
-
             <Frame BorderColor="{StaticResource BoxesColor}"
                    CornerRadius="5"
                    Padding="0, 0"
                    HasShadow="False"
                    HeightRequest="49"
-                   Margin="0, 0, 0, 20">
-                <SearchBar PlaceholderColor="{StaticResource MainThemeColor}"/>
+                   Margin="0, 0, 0, 36">
+                <SearchBar FontSize="16"/>
             </Frame>
 
-                <Frame BorderColor="{StaticResource BoxesColor}"
-                   CornerRadius="5"
-                   Padding="0, 0"
-                   HasShadow="False"
-                   HeightRequest="49"
-                   Margin="0, 0, 0, 20">
-                    <SearchBar PlaceholderColor="{StaticResource MainThemeColor}"/>
-                </Frame>
-
+            <StackLayout Orientation="Horizontal"
+                         Margin="0, 0, 0, 20">
+                <Label Text="*"
+                       FontSize="16"
+                       TextColor="{StaticResource StarColor}"/>
+                <Label Text="Дата отправления"
+                       FontSize="16"
+                       TextColor="{StaticResource HeadlinesColor}"/>
+            </StackLayout>
             <Frame BorderColor="{StaticResource BoxesColor}"
                    CornerRadius="5"
-                   Padding="0, 0"
+                   Padding="28, 0"
                    HasShadow="False"
                    HeightRequest="49"
-                   Margin="0, 0, 0, 20">
-                <SearchBar />
+                   Margin="0, 0, 0, 36">
+                <DatePicker FontSize= "16"
+                            Format="dd.MM.yyyy"/>
             </Frame>
 
+            <Label Text="Комментарий"
+                   FontSize="16"
+                   Margin="0, 0, 0, 20"
+                   TextColor="{StaticResource HeadlinesColor}"/>
+            <Frame BorderColor="{StaticResource BoxesColor}"
+                   CornerRadius="5"
+                   Padding="28, 0"
+                   HasShadow="False"
+                   Margin="0, 0, 0, 30">
+                <Editor HeightRequest="120"
+                        FontSize="16"/>
+            </Frame>
+
+            <StackLayout Orientation="Horizontal"
+                         Margin="0, 0, 0, 20"
+                         Padding="87, 0">
+                <Label Text="СТОИМОСТЬ:"
+                       FontSize="16"
+                       TextColor="{StaticResource LightThemeTextColor}"/>
+                <Label Text="--"
+                       FontSize="16"
+                       TextColor="{StaticResource LightThemeTextColor}"/>
+            </StackLayout>
+
+            <Button FontSize="20"
+                    Text="Создать заявку"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    TextTransform="None"
+                    HeightRequest="49"
+                    CornerRadius="5"
+                    BackgroundColor="{StaticResource MainThemeColor}"/>
         </StackLayout>
     </ScrollView>
 

@@ -11,7 +11,7 @@
                       Shell.TabBarUnselectedColor="#82879F"
                       Shell.TabBarTitleColor="Black"
                       Icon="icon_requests.png" 
-                      ContentTemplate="{DataTemplate views:MainPage}"/>
+                      ContentTemplate="{DataTemplate views:RequestsPage}"/>
         <ShellContent x:Name="Estimation" 
                       Title="Расчет"
                       Shell.TabBarUnselectedColor="#82879F"
