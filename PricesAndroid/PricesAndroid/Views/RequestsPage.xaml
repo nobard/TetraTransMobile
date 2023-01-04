@@ -13,6 +13,32 @@
                    Margin="0, 0, 0, 30"
                    TextColor="{StaticResource LightThemeTextColor}"/>
 
+            <Frame BorderColor="{StaticResource BoxesColor}"
+                   CornerRadius="10"
+                   Padding="0, 0"
+                   HasShadow="False"
+                   HeightRequest="49"
+                   Margin="0, 0, 0, 20">
+                <SearchBar FontSize="16"
+                           Placeholder="Поиск по любому полю"/>
+            </Frame>
+
+            <ListView x:Name="RequestsListView"
+                      CachingStrategy="RecycleElement">
+                <ListView.ItemTemplate>
+                  <DataTemplate>
+                    <ViewCell>
+                      <StackLayout>
+                                <Label Text="{Binding DepartureCity}" 
+                               Style="{DynamicResource ListItemTextStyle}" />
+                                <Label Text="{Binding ArriveDate}" 
+                               Style="{DynamicResource ListItemDetailTextStyle}"/>
+                      </StackLayout>
+                    </ViewCell>
+                  </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
         </StackLayout>
     </ScrollView>
 

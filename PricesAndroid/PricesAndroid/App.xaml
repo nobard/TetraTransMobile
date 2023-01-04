@@ -13,9 +13,11 @@
         <Color x:Key="HeadlinesColor">#82879F</Color>
         <Color x:Key="BoxesColor">#E7E9F2</Color>
         <Color x:Key="MainThemeColor">#F62933</Color>
-        <Color x:Key="2">#E7E9F2</Color>
-        <Color x:Key="3">#E7E9F2</Color>
-        <Color x:Key="4">#E7E9F2</Color>
+
+        <!-- Status Colors-->
+        <Color x:Key="DoneStatusColor">#68C76C</Color>
+        <Color x:Key="CreatedStatusColor">#FF3D3D</Color>
+        <Color x:Key="InProgressStatusColor">#FF8E3D</Color>
         
     </Application.Resources>
 </Application>

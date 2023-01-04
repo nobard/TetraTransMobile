@@ -131,22 +131,39 @@
                 <Editor HeightRequest="120"
                         FontSize="16"/>
             </Frame>
-
+<!--
             <StackLayout Orientation="Horizontal"
                          Margin="0, 0, 0, 20"
                          Padding="87, 0">
                 <Label Text="СТОИМОСТЬ:"
                        FontSize="16"
                        TextColor="{StaticResource LightThemeTextColor}"/>
-                <Label Text="--"
+                <Label Text="-"
                        FontSize="16"
                        TextColor="{StaticResource LightThemeTextColor}"/>
-            </StackLayout>
+            </StackLayout> -->
+
+            <Label FontSize="16"
+                   Padding="87, 0, 0, 0"
+                   Margin="0, 0, 0, 20"
+                   CharacterSpacing="20"
+                   TextColor="{StaticResource LightThemeTextColor}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <FormattedString.Spans>
+                            <Span Text="СТОИМОСТЬ:   "/>
+                            <Span x:Name="PriceValue"
+                                  Text="--"/>
+                        </FormattedString.Spans>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+
 
             <Button FontSize="20"
                     Text="Создать заявку"
                     TextColor="White"
-                    FontAttributes="Bold"
                     TextTransform="None"
                     HeightRequest="49"
                     CornerRadius="5"
