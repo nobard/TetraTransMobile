@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PricesAndroid.App">
+    <Application.Resources>
+        
+        <!-- Colors -->
+        <Color x:Key="LightThemeBackgroundColor">White</Color>
+        <Color x:Key="LightThemeTextColor">Black</Color>
+        <Color x:Key="DarkThemeBackgroundColor">#171717</Color>
+        <Color x:Key="DarkThemeTextColor">White</Color>
+        <Color x:Key="StarColor">#FF3D3D</Color>
+        <Color x:Key="HeadlinesColor">#82879F</Color>
+        <Color x:Key="BoxesColor">#E7E9F2</Color>
+        <Color x:Key="MainThemeColor">#F62933</Color>
+        <Color x:Key="2">#E7E9F2</Color>
+        <Color x:Key="3">#E7E9F2</Color>
+        <Color x:Key="4">#E7E9F2</Color>
+        
+    </Application.Resources>
+</Application>

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PricesAndroid.Views.MainPage">
+
+    <ScrollView>
+        <StackLayout Padding="21"
+                     Spacing="0"
+                     BackgroundColor="{StaticResource LightThemeBackgroundColor}">
+            <Label Text="Расчет" 
+                   FontSize="32" 
+                   FontAttributes="Bold"
+                   Margin="0, 0, 0, 30"
+                   TextColor="{StaticResource LightThemeTextColor}"/>
+        
+            <StackLayout Orientation="Horizontal"
+                         Margin="0, 0, 0, 20">
+                <Label Text="*"
+                       FontSize="16"
+                       TextColor="{StaticResource StarColor}"/>
+                <Label Text="Вид контейнера"
+                       FontSize="16"
+                       TextColor="{StaticResource HeadlinesColor}"/>
+            </StackLayout>
+        
+            <Frame BorderColor="{StaticResource BoxesColor}"
+                   CornerRadius="5"
+                   Padding="10, 0"
+                   HasShadow="False"
+                   HeightRequest="49"
+                   Margin="0, 0, 0, 20">
+                <Picker>
+                    <Picker.Items>
+                        <x:String>20 футов</x:String>
+                        <x:String>40 футов</x:String>
+                    </Picker.Items>
+                </Picker>
+            </Frame>
+
+            <StackLayout Orientation="Horizontal"
+                         Margin="0, 0, 0, 20">
+                <Label Text="*"
+                       FontSize="16"
+                       TextColor="{StaticResource StarColor}"/>
+                <Label Text="Вес груза (т)"
+                       FontSize="16"
+                       TextColor="{StaticResource HeadlinesColor}"/>
+            </StackLayout>
+
+            <Frame BorderColor="{StaticResource BoxesColor}"
+                   CornerRadius="5"
+                   Padding="10, 0"
+                   HasShadow="False"
+                   HeightRequest="49"
+                   Margin="0, 0, 0, 36">
+                <Entry ClearButtonVisibility="WhileEditing"/>
+            </Frame>
+
+            <StackLayout Orientation="Horizontal"
+                         Margin="0, 0, 0, 20">
+                <Label Text="*"
+                       FontSize="16"
+                       TextColor="{StaticResource StarColor}"/>
+                <Label Text="Пункт отправления"
+                       FontSize="16"
+                       TextColor="{StaticResource HeadlinesColor}"/>
+            </StackLayout>
+
+            <Frame BorderColor="{StaticResource BoxesColor}"
+                   BackgroundColor="{StaticResource BoxesColor}"
+                   CornerRadius="5"
+                   Padding="28, 0"
+                   HasShadow="False"
+                   HeightRequest="49"
+                   Margin="0, 0, 0, 36">
+                <!--<Label Text="ЕКАТЕРИНБУРГ"
+                       VerticalTextAlignment="Center"
+                       FontSize="16"
+                       TextColor="#5E5E5E"/> -->
+                
+                <Entry Text="ЕКАТЕРИНБУРГ"
+                       IsReadOnly="True"/>
+            </Frame>
+
+            <StackLayout Orientation="Horizontal"
+                         Margin="0, 0, 0, 20">
+                <Label Text="*"
+                       FontSize="16"
+                       TextColor="{StaticResource StarColor}"/>
+                <Label Text="Пункт назначения"
+                       FontSize="16"
+                       TextColor="{StaticResource HeadlinesColor}"/>
+            </StackLayout>
+
+            <Frame BorderColor="{StaticResource BoxesColor}"
+                   CornerRadius="5"
+                   Padding="0, 0"
+                   HasShadow="False"
+                   HeightRequest="49"
+                   Margin="0, 0, 0, 20">
+                <SearchBar PlaceholderColor="{StaticResource MainThemeColor}"/>
+            </Frame>
+
+                <Frame BorderColor="{StaticResource BoxesColor}"
+                   CornerRadius="5"
+                   Padding="0, 0"
+                   HasShadow="False"
+                   HeightRequest="49"
+                   Margin="0, 0, 0, 20">
+                    <SearchBar PlaceholderColor="{StaticResource MainThemeColor}"/>
+                </Frame>
+
+            <Frame BorderColor="{StaticResource BoxesColor}"
+                   CornerRadius="5"
+                   Padding="0, 0"
+                   HasShadow="False"
+                   HeightRequest="49"
+                   Margin="0, 0, 0, 20">
+                <SearchBar />
+            </Frame>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

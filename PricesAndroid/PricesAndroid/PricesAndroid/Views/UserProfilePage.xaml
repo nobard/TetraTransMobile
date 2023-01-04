@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PricesAndroid.Views.UserProfilePage">
+    
+    <ScrollView>
+        <StackLayout Padding="21"
+                     Spacing="0"
+                     BackgroundColor="{StaticResource LightThemeBackgroundColor}">
+            <Label Text="Профиль" 
+                   FontSize="32" 
+                   FontAttributes="Bold"
+                   Margin="0, 0, 0, 30"
+                   TextColor="{StaticResource LightThemeTextColor}"/>
+
+            <Frame BorderColor="{StaticResource BoxesColor}"
+                   CornerRadius="5"
+                   Padding="28, 0"
+                   HasShadow="False"
+                   HeightRequest="49"
+                   Margin="0, 0, 0, 10">
+                <Label Text="Челядникова Анастасия Константиновна"
+                       VerticalTextAlignment="Center"
+                       FontSize="18"
+                       TextColor="{StaticResource LightThemeTextColor}"/>
+            </Frame>
+
+            <Frame BorderColor="{StaticResource BoxesColor}"
+                   CornerRadius="5"
+                   Padding="28, 0"
+                   HasShadow="False"
+                   HeightRequest="49"
+                   Margin="0, 0, 0, 10">
+                <Label Text="+7 (901) 453 45-15"
+                       VerticalTextAlignment="Center"
+                       FontSize="18"
+                       TextColor="{StaticResource LightThemeTextColor}"/>
+            </Frame>
+
+            <Frame BorderColor="{StaticResource BoxesColor}"
+                   CornerRadius="5"
+                   Padding="28, 0"
+                   HasShadow="False"
+                   HeightRequest="49"
+                   Margin="0, 0, 0, 10">
+                <Label Text="nastya.chelyadnikova@mail.ru"
+                       VerticalTextAlignment="Center"
+                       FontSize="18"
+                       TextColor="{StaticResource LightThemeTextColor}"/>
+            </Frame>
+
+            <Frame BorderColor="{StaticResource BoxesColor}"
+                   CornerRadius="5"
+                   Padding="28, 0"
+                   HasShadow="False"
+                   HeightRequest="49"
+                   Margin="0, 0, 0, 10">
+                <Label Text="ООО &quot;Ромашка&quot;"
+                       VerticalTextAlignment="Center"
+                       FontSize="18"
+                       TextColor="{StaticResource LightThemeTextColor}"/>
+            </Frame>
+
+            <Frame BorderColor="{StaticResource BoxesColor}"
+                   CornerRadius="5"
+                   Padding="28, 0"
+                   HasShadow="False"
+                   HeightRequest="49"
+                   Margin="0, 0, 0, 10">
+                <Label Text="519211514"
+                       VerticalTextAlignment="Center"
+                       FontSize="18"
+                       TextColor="{StaticResource LightThemeTextColor}"/>
+            </Frame>
+            
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
