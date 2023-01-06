@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PricesAndroid.Views.RequestsPage">
 
-    <StackLayout Padding="21"
+    <StackLayout Padding="21, 20, 21, 0"
                  Spacing="0"
                  BackgroundColor="{StaticResource LightThemeBackgroundColor}">
         <Label Text="Мои заявки" 
@@ -24,6 +24,10 @@
 
         <CollectionView x:Name="RequestsListView"
                         SelectionMode="Single">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout BackgroundColor="White">
@@ -31,7 +35,7 @@
                                CornerRadius="5"
                                Padding="25, 25, 0, 0"
                                HasShadow="False">
-                            <StackLayout>
+                            <StackLayout Spacing="0">
                                 <Label FontSize="20"
                                        Margin="0, 0, 0, 5"
                                        FontAttributes="Bold"
