@@ -25,7 +25,8 @@
         <CollectionView x:Name="RequestsListView"
                         SelectionMode="Single">
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout ItemSpacing="10"/>
+                <LinearItemsLayout ItemSpacing="10"
+                                   Orientation="Vertical"/>
             </CollectionView.ItemsLayout>
 
             <CollectionView.ItemTemplate>
@@ -141,7 +142,7 @@
                                             <FormattedString>
                                                 <FormattedString.Spans>
                                                     <Span Text="от "/>
-                                                    <Span Text="{Binding ArriveDate}"/>
+                                                    <Span Text="{Binding RequestCreateDate}"/>
                                                 </FormattedString.Spans>
                                             </FormattedString>
                                         </Label.FormattedText>

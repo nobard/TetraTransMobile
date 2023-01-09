@@ -23,7 +23,7 @@ namespace PricesAndroid.Models
 
         public string DepartureDate { get; set; }
 
-        public string ArriveDate { get; set; }
+        public string RequestCreateDate { get; set; }
 
         public Request(int number, StatusEnum enums, string dep, string arr, int size, int weight, int price, string depd,
             string arrd)
@@ -36,7 +36,7 @@ namespace PricesAndroid.Models
             CargoWeight = weight;
             Price = price;
             DepartureDate = depd;
-            ArriveDate = arrd;
+            RequestCreateDate = arrd;
         }
     }
 }
