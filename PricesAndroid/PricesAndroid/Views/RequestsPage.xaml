@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:PricesAndroid.ViewModels;assembly=PricesAndroid"
              x:Class="PricesAndroid.Views.RequestsPage">
 
     <StackLayout Padding="21, 20, 21, 0"
@@ -23,7 +24,9 @@
         </Frame>
 
         <CollectionView x:Name="RequestsListView"
-                        SelectionMode="Single">
+                        x:DataType="viewModels:RequestsViewModel"
+                        SelectionMode="Single"
+                        ItemsSource="{Binding RequestsList}">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout ItemSpacing="10"
                                    Orientation="Vertical"/>

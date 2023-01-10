@@ -23,7 +23,7 @@
                    HasShadow="False"
                    HeightRequest="49"
                    Margin="0, 0, 0, 10">
-                <Label Text="Челядникова Анастасия Константиновна"
+                <Label Text="{Binding User.FullName}"
                        VerticalTextAlignment="Center"
                        LineBreakMode="TailTruncation"
                        FontSize="18"
@@ -40,7 +40,7 @@
                    HasShadow="False"
                    HeightRequest="49"
                    Margin="0, 0, 0, 10">
-                <Label Text="+7 (901) 453 45-15"
+                <Label Text="{Binding User.PhoneNumber}"
                        VerticalTextAlignment="Center"
                        FontSize="18"
                        TextColor="{StaticResource LightThemeTextColor}"/>
@@ -56,7 +56,7 @@
                    HasShadow="False"
                    HeightRequest="49"
                    Margin="0, 0, 0, 10">
-                <Label Text="nastya.chelyadnikova@mail.ru"
+                <Label Text="{Binding User.Email}"
                        VerticalTextAlignment="Center"
                        LineBreakMode="TailTruncation"
                        FontSize="18"
@@ -73,7 +73,7 @@
                    HasShadow="False"
                    HeightRequest="49"
                    Margin="0, 0, 0, 10">
-                <Label Text="ООО &quot;Ромашка&quot;"
+                <Label Text="{Binding User.Organization}"
                        VerticalTextAlignment="Center"
                        LineBreakMode="TailTruncation"
                        FontSize="18"
@@ -90,7 +90,7 @@
                    HasShadow="False"
                    HeightRequest="49"
                    Margin="0, 0, 0, 10">
-                <Label Text="519211514"
+                <Label Text="{Binding User.INN}"
                        VerticalTextAlignment="Center"
                        FontSize="18"
                        TextColor="{StaticResource LightThemeTextColor}"/>

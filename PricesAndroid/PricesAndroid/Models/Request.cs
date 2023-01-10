@@ -25,8 +25,10 @@ namespace PricesAndroid.Models
 
         public string RequestCreateDate { get; set; }
 
-        public Request(int number, StatusEnum enums, string dep, string arr, int size, int weight, int price, string depd,
-            string arrd)
+        public string Comment { get; set; }
+
+        public Request(int number, StatusEnum enums, string dep, string arr, int size, int weight, int price, string depD,
+            string arrD, string comment = "")
         {
             RequestNumber = number;
             RequestStatus = enums;
@@ -35,8 +37,9 @@ namespace PricesAndroid.Models
             ContainerSize = size;
             CargoWeight = weight;
             Price = price;
-            DepartureDate = depd;
-            RequestCreateDate = arrd;
+            DepartureDate = depD;
+            RequestCreateDate = arrD;
+            Comment = comment;
         }
     }
 }
