@@ -7,6 +7,8 @@ namespace PricesAndroid.Models
 {
     public class Request
     {
+        public string Id { get; set; }
+
         public int RequestNumber { get; set; }
 
         public StatusEnum RequestStatus { get; set; }
