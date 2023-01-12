@@ -69,6 +69,36 @@
                                            HorizontalOptions="Center"/>
                                 </Frame>
 
+                                <Frame BackgroundColor="{StaticResource InProgressStatusColor}"
+                                       HeightRequest="24"
+                                       WidthRequest="103"
+                                       HorizontalOptions="Start"
+                                       HasShadow="False"
+                                       CornerRadius="7"
+                                       Padding="0"
+                                       Margin="0, 0, 0, 20">
+                                    <Label Text="Выполнено"
+                                           FontSize="14"
+                                           TextColor="White"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
+                                </Frame>
+
+                                <Frame BackgroundColor="{StaticResource CreatedStatusColor}"
+                                       HeightRequest="24"
+                                       WidthRequest="103"
+                                       HorizontalOptions="Start"
+                                       HasShadow="False"
+                                       CornerRadius="7"
+                                       Padding="0"
+                                       Margin="0, 0, 0, 20">
+                                    <Label Text="Выполнено"
+                                           FontSize="14"
+                                           TextColor="White"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
+                                </Frame>
+
                                 <StackLayout Orientation="Horizontal">
                                     <Label FontSize="15"
                                            Margin="0, 0, 0, 10"
