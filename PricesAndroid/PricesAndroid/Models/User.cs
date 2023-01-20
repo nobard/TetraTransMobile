@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace PricesAndroid.Models
@@ -15,6 +16,16 @@ namespace PricesAndroid.Models
         public string Email { get; set; }
         public string Organization { get; set; }
         public string INN { get; set; }
+
+        private ObservableCollection<Request> requestsList;
+        public ObservableCollection<Request> RequestsList
+        {
+            get
+            {
+                // подгружать из бд
+                return requestsList = requestsList ?? new ObservableCollection<Request>();
+            }
+        }
 
         public User(int id = 0, string name = "Анастасия", string surName = "Челядникова", string patronymic = "Константиновна", string phoneNumber = "+7 (901) 453 45-15", string email = "nastya.chelyadnikova@mail.ru", string organization = "ООО \"Ромашка\"", string iNN = "519211514")
         {

@@ -19,11 +19,11 @@
                        FontSize="32" 
                        FontAttributes="Bold"
                        TextColor="{StaticResource LightThemeTextColor}"/>
-                <ImageButton Source="icon_logout1.png"
+                <ImageButton Source="icon_logout.png"
                              Grid.Column="1"
+                             HeightRequest="25"
                              BackgroundColor="White"
-                             HorizontalOptions="End"
-                             VerticalOptions="Center"/>
+                             HorizontalOptions="End"/>
             </Grid>
             
             <Label Text="ФИО"

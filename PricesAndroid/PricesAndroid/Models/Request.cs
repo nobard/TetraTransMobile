@@ -17,11 +17,11 @@ namespace PricesAndroid.Models
 
         public string ArrivalCity { get; set; }
 
-        public int ContainerSize { get; set; }
+        public string ContainerSize { get; set; }
 
-        public int CargoWeight { get; set; }
+        public string CargoWeight { get; set; }
 
-        public int Price { get; set; }
+        public string Price { get; set; }
 
         public string DepartureDate { get; set; }
 
@@ -29,19 +29,19 @@ namespace PricesAndroid.Models
 
         public string Comment { get; set; }
 
-        public Request(int number, StatusEnum enums, string dep, string arr, int size, int weight, int price, string depD,
-            string arrD, string comment = "")
-        {
-            RequestNumber = number;
-            RequestStatus = enums;
-            DepartureCity = dep;
-            ArrivalCity = arr;
-            ContainerSize = size;
-            CargoWeight = weight;
-            Price = price;
-            DepartureDate = depD;
-            RequestCreateDate = arrD;
-            Comment = comment;
-        }
+        //public Request(int number, StatusEnum enums, string dep, string arr, int size, int weight, int price, string depD,
+        //    string arrD, string comment = "")
+        //{
+        //    RequestNumber = number;
+        //    RequestStatus = enums;
+        //    DepartureCity = dep;
+        //    ArrivalCity = arr;
+        //    ContainerSize = size;
+        //    CargoWeight = weight;
+        //    Price = price;
+        //    DepartureDate = depD;
+        //    RequestCreateDate = arrD;
+        //    Comment = comment;
+        //}
     }
 }

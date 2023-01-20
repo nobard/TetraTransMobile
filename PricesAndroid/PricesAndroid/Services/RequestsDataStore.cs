@@ -7,7 +7,7 @@ using PricesAndroid.Models;
 
 namespace PricesAndroid.Services
 {
-    public class RequestsDataStore : IDataStore<Request>
+    public class  RequestsDataStore : IDataStore<Request>
     {
         readonly List<Request> requests;
 
@@ -15,9 +15,9 @@ namespace PricesAndroid.Services
         {
             requests = new List<Request>()
             {
-                new Request(1, StatusEnum.Created, "Екатеринбург", "Бугульма", 20, 2, 20000, "15.09.22", "09.12.22"),
-                new Request(2, StatusEnum.Done, "Когалым", "Сургут", 40, 3, 30000, "01.10.22", "15.11.22"),
-                new Request(3, StatusEnum.InProgress, "Тюмень", "Тобольск", 20, 10, 9000, "25.09.22", "09.11.22")
+                //new Request(1, StatusEnum.Created, "Екатеринбург", "Бугульма", 20, 2, 20000, "15.09.22", "09.12.22"),
+                //new Request(2, StatusEnum.Done, "Когалым", "Сургут", 40, 3, 30000, "01.10.22", "15.11.22"),
+                //new Request(3, StatusEnum.InProgress, "Тюмень", "Тобольск", 20, 10, 9000, "25.09.22", "09.11.22")
             };
         }
 

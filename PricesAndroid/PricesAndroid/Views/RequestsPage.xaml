@@ -60,10 +60,12 @@
                                        HorizontalOptions="Start"
                                        HasShadow="False"
                                        CornerRadius="7"
+                                       IsVisible="False"
                                        Padding="0"
                                        Margin="0, 0, 0, 20">
                                     <Label Text="Выполнено"
                                            FontSize="14"
+                                           FontAttributes="Bold"
                                            TextColor="White"
                                            VerticalOptions="Center"
                                            HorizontalOptions="Center"/>
@@ -75,10 +77,12 @@
                                        HorizontalOptions="Start"
                                        HasShadow="False"
                                        CornerRadius="7"
+                                       IsVisible="False"
                                        Padding="0"
                                        Margin="0, 0, 0, 20">
-                                    <Label Text="Выполнено"
+                                    <Label Text="В работе"
                                            FontSize="14"
+                                           FontAttributes="Bold"
                                            TextColor="White"
                                            VerticalOptions="Center"
                                            HorizontalOptions="Center"/>
@@ -92,8 +96,9 @@
                                        CornerRadius="7"
                                        Padding="0"
                                        Margin="0, 0, 0, 20">
-                                    <Label Text="Выполнено"
+                                    <Label Text="Создана"
                                            FontSize="14"
+                                           FontAttributes="Bold"
                                            TextColor="White"
                                            VerticalOptions="Center"
                                            HorizontalOptions="Center"/>
@@ -124,7 +129,6 @@
                                             <FormattedString>
                                                 <FormattedString.Spans>
                                                     <Span Text="{Binding ContainerSize}"/>
-                                                    <Span Text=" футов"/>
                                                     <Span Text=" | "
                                                           FontAttributes="Bold"/>
                                                     <Span Text="{Binding CargoWeight}"/>
