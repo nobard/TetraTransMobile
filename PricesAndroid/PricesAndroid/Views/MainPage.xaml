@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:PricesAndroid.ViewModels;assembly=PricesAndroid"
+             xmlns:custom="clr-namespace:PricesAndroid.TetraControls;assembly=PricesAndroid"
              x:Class="PricesAndroid.Views.MainPage">
 
     <ScrollView>
@@ -53,7 +54,7 @@
                    HasShadow="False"
                    HeightRequest="49"
                    Margin="0, 0, 0, 36">
-                <Entry Text="{Binding CargoWeight}"
+                <custom:TetraEntry Text="{Binding CargoWeight}"
                        FontSize="16"
                        Keyboard="Numeric"
                        ClearButtonVisibility="WhileEditing"/>
@@ -76,7 +77,7 @@
                    HeightRequest="49"
                    Margin="0, 0, 0, 36">
                 
-                <Entry Text="{Binding DepartureCity}"
+                <custom:TetraEntry Text="{Binding DepartureCity}"
                        FontSize="16"
                        TextColor="#5E5E5E"
                        IsReadOnly="True"/>
@@ -133,7 +134,7 @@
                    Padding="28, 0"
                    HasShadow="False"
                    Margin="0, 0, 0, 30">
-                <Editor Text="{Binding Comment}"
+                <custom:TetraEditor Text="{Binding Comment}"
                         HeightRequest="120"
                         Keyboard="Text"
                         FontSize="16"/>

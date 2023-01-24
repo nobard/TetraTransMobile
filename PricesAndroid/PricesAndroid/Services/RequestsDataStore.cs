@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using PricesAndroid.Models;
@@ -50,7 +51,24 @@ namespace PricesAndroid.Services
         public async Task<IEnumerable<Request>> GetItemsAsync(bool forceRefresh = false)
         {
             //TODO
+            
             return await Task.FromResult(requests);
+        }
+
+        public async Task<IEnumerable<Request>> GetRequestsAsync(int id)
+        {
+            List<Request> requestsList = new List<Request>();
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync($"https://localhost:7181/Api/DAL/Requests/GetAllRequestsByClientId?clientId={id}"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    //requestsList = JsonConvert.DeserializeObject<List<Request>>(apiResponse);
+                }
+            }
+
+            return requestsList;
         }
     }
 }

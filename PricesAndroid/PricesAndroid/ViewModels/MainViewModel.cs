@@ -101,7 +101,6 @@ namespace PricesAndroid.ViewModels
 
         private void ClearFields()
         {
-            //TODO поменять обратно на поля и чистить их
             ContainerSize = string.Empty;
             CargoWeight = string.Empty;
             ArrivalCity = string.Empty;
