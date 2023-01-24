@@ -30,7 +30,7 @@
                    HasShadow="False"
                    HeightRequest="49"
                    Margin="0, 0, 0, 20">
-                <Picker SelectedItem="{Binding NewRequest.ContainerSize}">
+                <Picker SelectedItem="{Binding ContainerSize}">
                     <Picker.Items>
                         <x:String>20 футов</x:String>
                         <x:String>40 футов</x:String>
@@ -53,8 +53,9 @@
                    HasShadow="False"
                    HeightRequest="49"
                    Margin="0, 0, 0, 36">
-                <Entry Text="{Binding NewRequest.CargoWeight}"
+                <Entry Text="{Binding CargoWeight}"
                        FontSize="16"
+                       Keyboard="Numeric"
                        ClearButtonVisibility="WhileEditing"/>
             </Frame>
 
@@ -96,7 +97,8 @@
                    HasShadow="False"
                    HeightRequest="49"
                    Margin="0, 0, 0, 36">
-                <SearchBar Text="{Binding NewRequest.ArrivalCity}"
+                <SearchBar Text="{Binding ArrivalCity}"
+                           Keyboard="Text"
                            FontSize="16"/>
             </Frame>
 
@@ -115,8 +117,10 @@
                    HasShadow="False"
                    HeightRequest="49"
                    Margin="0, 0, 0, 36">
-                <DatePicker Date="{Binding NewRequest.DepartureDate}"
+                <DatePicker Date="{Binding DepartureDate}"
                             FontSize= "16"
+                            MinimumDate="{Binding MinimumDate}"
+                            
                             Format="dd.MM.yyyy"/>
             </Frame>
 
@@ -129,8 +133,9 @@
                    Padding="28, 0"
                    HasShadow="False"
                    Margin="0, 0, 0, 30">
-                <Editor Text="{Binding NewRequest.Comment}"
+                <Editor Text="{Binding Comment}"
                         HeightRequest="120"
+                        Keyboard="Text"
                         FontSize="16"/>
             </Frame>
 

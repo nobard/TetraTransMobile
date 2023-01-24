@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using PricesAndroid.Models;
@@ -11,28 +12,43 @@ namespace PricesAndroid.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        public Request NewRequest { get; set; }
-
         private readonly StatusEnum status = StatusEnum.Created;
+        public DateTime MinimumDate { get; set; } = DateTime.Today;
 
-        //public string ContainerSize { get; set; }
+        private string containerSize;
+        public string ContainerSize
+        {
+            get => containerSize;
+            set => SetProperty(ref containerSize, value);
+        }
 
-        //public string CargoWeight { get; set; }
+        private string cargoWeight;
+        public string CargoWeight
+        {
+            get => cargoWeight;
+            set => SetProperty(ref cargoWeight, value);
+        }
 
         public string DepartureCity { get; set; } = "ЕКАТЕРИНБУРГ";
 
-        //public string ArrivalCity { get; set; }
-
-        //public string DepartureDate { get; set; }
-
-        //public string Comment { get; set; }
-
-        public string TotalPrice { get; set; }
-
-        public MainViewModel()
+        private string arrivalCity;
+        public string ArrivalCity
         {
-            NewRequest = new Request();
+            get => arrivalCity;
+            set => SetProperty(ref arrivalCity, value);
         }
+
+        public string DepartureDate { get; set; }
+
+        private string comment;
+        public string Comment
+        {
+            get => comment;
+            set => SetProperty(ref comment, value);
+        }
+
+        
+        public string TotalPrice { get; set; }
 
         #region COMMANDS
 
@@ -50,33 +66,47 @@ namespace PricesAndroid.ViewModels
 
         public void CreateRequest()
         {
-            var request = new Request
+            if (CheckRequiredFields())
             {
-                //Id = bd
-                //RequestNumber = bd
-                RequestStatus = status,
-                DepartureCity = DepartureCity,
-                ArrivalCity = NewRequest.ArrivalCity,
-                ContainerSize = NewRequest.ContainerSize,
-                CargoWeight = NewRequest.CargoWeight,
-                //Price = bd TotalPrice
-                DepartureDate = NewRequest.DepartureDate,
-                RequestCreateDate = DateTime.Today.ToShortDateString(),
-                Comment = NewRequest.Comment
-            };
+                var request = new Request 
+                {
+                    //Id = bd
+                    //RequestNumber = bd
+                    RequestStatus = status,
+                    DepartureCity = DepartureCity,
+                    ArrivalCity = ArrivalCity,
+                    ContainerSize = ContainerSize,
+                    CargoWeight = CargoWeight,
+                    //Price = bd TotalPrice
+                    DepartureDate = DateTime.ParseExact(DepartureDate, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString(),
+                    RequestCreateDate = DateTime.Today.ToShortDateString(),
+                    Comment = Comment
+                };
 
-            App.UserInfo.RequestsList.Add(request);
-            ClearFields();
+                App.UserInfo.RequestsList.Add(request);
+                ClearFields();
+            }
+            else
+            {
+                App.Current.MainPage.DisplayAlert("", "Не все поля заполнены", "OK");
+            }
+
+            
         }
-        private void CheckRequiredFields()
+        private bool CheckRequiredFields()
         {
-
+            //datepicker propertychanged ? ok : showallert(datu viberi)
+            return true;
         }
 
         private void ClearFields()
         {
             //TODO поменять обратно на поля и чистить их
-            NewRequest = new Request();
+            ContainerSize = string.Empty;
+            CargoWeight = string.Empty;
+            ArrivalCity = string.Empty;
+            Comment = string.Empty;
+            DepartureDate = string.Empty;
         }
     }
 }
