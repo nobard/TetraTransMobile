@@ -5,14 +5,16 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using PricesAndroid.Models;
+using Newtonsoft.Json;
 
 namespace PricesAndroid.Services
 {
-    public class  RequestsDataStore : IDataStore<Request>
+    public class  RequestDataStore : IDataStore<Request>
     {
         readonly List<Request> requests;
+        private string Url = "http://192.168.0.187:5181/";
 
-        public RequestsDataStore()
+        public RequestDataStore()
         {
             requests = new List<Request>()
             {
@@ -36,13 +38,13 @@ namespace PricesAndroid.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteItemAsync(int id)
         {
             //TODO
             return await Task.FromResult(true);
         }
 
-        public async Task<Request> GetItemAsync(string id)
+        public async Task<Request> GetItemAsync(int id)
         {
             //TODO
             return await Task.FromResult(requests.FirstOrDefault(s => s.Id == id));
@@ -57,14 +59,14 @@ namespace PricesAndroid.Services
 
         public async Task<IEnumerable<Request>> GetRequestsAsync(int id)
         {
-            List<Request> requestsList = new List<Request>();
+            List<Request> requestsList;
 
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync($"https://localhost:7181/Api/DAL/Requests/GetAllRequestsByClientId?clientId={id}"))
+                using (var response = await httpClient.GetAsync($"{Url}Api/DAL/Requests/GetAllRequestsByClientId?clientId={id}"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    //requestsList = JsonConvert.DeserializeObject<List<Request>>(apiResponse);
+                    requestsList = JsonConvert.DeserializeObject<List<Request>>(apiResponse);
                 }
             }
 

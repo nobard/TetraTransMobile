@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PricesAndroid.Models
 {
-    public class User
+    public class Client
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -27,7 +27,7 @@ namespace PricesAndroid.Models
             }
         }
 
-        public User(int id = 0, string name = "Анастасия", string surName = "Челядникова", string patronymic = "Константиновна", string phoneNumber = "+7 (901) 453 45-15", string email = "nastya.chelyadnikova@mail.ru", string organization = "ООО \"Ромашка\"", string iNN = "519211514")
+        public Client(int id = 0, string name = "Анастасия", string surName = "Челядникова", string patronymic = "Константиновна", string phoneNumber = "+7 (901) 453 45-15", string email = "nastya.chelyadnikova@mail.ru", string organization = "ООО \"Ромашка\"", string iNN = "519211514")
         {
             Id = id;
             Name = name;

@@ -12,7 +12,7 @@ namespace PricesAndroid.ViewModels
 
         public RequestsViewModel()
         {
-            RequestsList = App.UserInfo.RequestsList;
+            RequestsList = App.Client.RequestsList;
         }
     }
 }

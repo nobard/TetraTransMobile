@@ -10,18 +10,18 @@ namespace PricesAndroid
 {
     public partial class App : Application
     {
-        private static User userInfo;
+        public static Client Client { get; set; } = new Client();
 
-        public static User UserInfo
+        private static ClientDataStore clientDb;
+        public static ClientDataStore ClientDb
         {
             get
             {
-                return userInfo = userInfo ?? new User();
+                return clientDb = clientDb ?? new ClientDataStore();
             }
         }
 
-        private static RequestsDataStore requestsDb;
-
+        private static RequestDataStore requestsDb;
         //public static RequestsDataStore RequestsDb
         //{
         //    get
@@ -39,10 +39,11 @@ namespace PricesAndroid
         }
 
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
             //Игнор темы системы(всегда светлая)
             //Current.UserAppTheme = OSAppTheme.Light;
+            //Client = await ClientDb.GetItemAsync("user1");
         }
 
         protected override void OnSleep()

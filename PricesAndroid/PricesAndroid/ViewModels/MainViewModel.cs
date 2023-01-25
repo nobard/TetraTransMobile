@@ -15,18 +15,33 @@ namespace PricesAndroid.ViewModels
         private readonly StatusEnum status = StatusEnum.Created;
         public DateTime MinimumDate { get; set; } = DateTime.Today;
 
+        private bool isEnabledButton;
+        public bool IsEnabledButton
+        {
+            get => isEnabledButton;
+            set => SetProperty(ref isEnabledButton, value);
+        }
+
         private string containerSize;
         public string ContainerSize
         {
             get => containerSize;
-            set => SetProperty(ref containerSize, value);
+            set
+            {
+                SetProperty(ref containerSize, value);
+                CheckRequiredFields();
+            }
         }
 
         private string cargoWeight;
         public string CargoWeight
         {
             get => cargoWeight;
-            set => SetProperty(ref cargoWeight, value);
+            set
+            {
+                SetProperty(ref cargoWeight, value);
+                CheckRequiredFields();
+            }
         }
 
         public string DepartureCity { get; set; } = "ЕКАТЕРИНБУРГ";
@@ -35,10 +50,14 @@ namespace PricesAndroid.ViewModels
         public string ArrivalCity
         {
             get => arrivalCity;
-            set => SetProperty(ref arrivalCity, value);
+            set
+            {
+                SetProperty(ref arrivalCity, value);
+                CheckRequiredFields();
+            }
         }
 
-        public string DepartureDate { get; set; }
+        public DateTime DepartureDate { get; set; } = DateTime.Now;
 
         private string comment;
         public string Comment
@@ -66,37 +85,35 @@ namespace PricesAndroid.ViewModels
 
         public void CreateRequest()
         {
-            if (CheckRequiredFields())
+            var message = "Спасибо за заявку! В ближайшее время с Вами свяжется наш менеджер";
+            var request = new Request
             {
-                var request = new Request 
-                {
-                    //Id = bd
-                    //RequestNumber = bd
-                    RequestStatus = status,
-                    DepartureCity = DepartureCity,
-                    ArrivalCity = ArrivalCity,
-                    ContainerSize = ContainerSize,
-                    CargoWeight = CargoWeight,
-                    //Price = bd TotalPrice
-                    DepartureDate = DateTime.ParseExact(DepartureDate, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString(),
-                    RequestCreateDate = DateTime.Today.ToShortDateString(),
-                    Comment = Comment
-                };
+                //Id = bd
+                //RequestNumber = bd
+                RequestStatus = status,
+                DepartureCity = DepartureCity,
+                ArrivalCity = ArrivalCity,
+                ContainerSize = ContainerSize,
+                CargoWeight = CargoWeight,
+                //Price = bd TotalPrice
+                //DepartureDate = DateTime.ParseExact(DepartureDate, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString(),
+                DepartureDate = DepartureDate.ToShortDateString(),
+                RequestCreateDate = DateTime.Today.ToShortDateString(),
+                Comment = Comment
+            };
 
-                App.UserInfo.RequestsList.Add(request);
-                ClearFields();
-            }
-            else
-            {
-                App.Current.MainPage.DisplayAlert("", "Не все поля заполнены", "OK");
-            }
-
-            
+            App.Client.RequestsList.Add(request);
+            ClearFields();
+            App.Current.MainPage.DisplayAlert("", message, "Отлично!");
         }
-        private bool CheckRequiredFields()
+
+        private void CheckRequiredFields()
         {
-            //datepicker propertychanged ? ok : showallert(datu viberi)
-            return true;
+            IsEnabledButton = ContainerSize?.Length > 0 && CargoWeight?.Length > 0 && ArrivalCity?.Length > 0;
+            if (IsEnabledButton)
+            {
+                //посчитать и вывести цену TotalPrice = бд
+            }
         }
 
         private void ClearFields()
@@ -105,7 +122,7 @@ namespace PricesAndroid.ViewModels
             CargoWeight = string.Empty;
             ArrivalCity = string.Empty;
             Comment = string.Empty;
-            DepartureDate = string.Empty;
+            DepartureDate = DateTime.Now;
         }
     }
 }

@@ -7,11 +7,11 @@ namespace PricesAndroid.ViewModels
 {
     public class UserProfileViewModel : BaseViewModel
     {
-        public User User { get; }
+        public Client User { get; }
 
         public UserProfileViewModel()
         {
-            User = new User();
+            User = App.Client;
         }
     }
 }

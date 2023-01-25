@@ -18,6 +18,28 @@
         <Color x:Key="DoneStatusColor">#68C76C</Color>
         <Color x:Key="CreatedStatusColor">#FF3D3D</Color>
         <Color x:Key="InProgressStatusColor">#FF8E3D</Color>
-        
+
+        <!-- ButtonStyle -->
+        <Style TargetType="Button">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#F62933" />
+                                <Setter Property="TextColor" Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#FB999D" />
+                                <Setter Property="TextColor" Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
     </Application.Resources>
 </Application>
