@@ -19,7 +19,8 @@
                HasShadow="False"
                HeightRequest="49"
                Margin="0, 0, 0, 20">
-            <SearchBar FontSize="16"
+            <SearchBar Text="{Binding SearchQuery}"
+                       FontSize="16"
                        Placeholder="Поиск по любому полю"/>
         </Frame>
 

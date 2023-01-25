@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,9 @@ namespace PricesAndroid.ViewModels
     {
         private readonly StatusEnum status = StatusEnum.Created;
         public DateTime MinimumDate { get; set; } = DateTime.Today;
+        public DateTime DepartureDate { get; set; } = DateTime.Now;
+        public string DepartureCity { get; set; } = "ЕКАТЕРИНБУРГ";
+        public string TotalPrice { get; set; }
 
         private bool isEnabledButton;
         public bool IsEnabledButton
@@ -44,8 +48,6 @@ namespace PricesAndroid.ViewModels
             }
         }
 
-        public string DepartureCity { get; set; } = "ЕКАТЕРИНБУРГ";
-
         private string arrivalCity;
         public string ArrivalCity
         {
@@ -54,10 +56,9 @@ namespace PricesAndroid.ViewModels
             {
                 SetProperty(ref arrivalCity, value);
                 CheckRequiredFields();
+                SearchResults = GetSearchResults(arrivalCity);
             }
         }
-
-        public DateTime DepartureDate { get; set; } = DateTime.Now;
 
         private string comment;
         public string Comment
@@ -66,13 +67,27 @@ namespace PricesAndroid.ViewModels
             set => SetProperty(ref comment, value);
         }
 
-        
-        public string TotalPrice { get; set; }
+        private List<string> searchResults;
+        public List<string> SearchResults
+        {
+            get => searchResults;
+            set
+            {
+                ListHeight = (value.Count > 5 ? 5 : value.Count) * 45;
+                SetProperty(ref searchResults, value);
+            }
+        }
+
+        private int listHeight;
+        public int ListHeight
+        {
+            get => listHeight;
+            set => SetProperty(ref listHeight, value);
+        }
 
         #region COMMANDS
 
         private ICommand createRequestCommand;
-
         public ICommand CreateRequestCommand
         {
             get
@@ -83,26 +98,40 @@ namespace PricesAndroid.ViewModels
 
         #endregion
 
+        public List<string> GetSearchResults(string query)
+        {
+            if (string.IsNullOrEmpty(query)) return new List<string>();
+            var all = new List<string>
+                { "Когалым", "Екатеринбург", "Тюмень", "Тобольск", "Курган", "Кушва", "Уренгой" };
+
+            var newList = all
+                .Where(e => e.ToLower().Contains(query.ToLower()))
+                .OrderBy(e => e.ToLower().TakeWhile(x => x != query.ToLower().First()).Count())
+                .ToList();
+
+            return newList.Count == 1 && newList.First().ToLower() == query.ToLower() ? new List<string>() : newList;
+        }
+
         public void CreateRequest()
         {
             var message = "Спасибо за заявку! В ближайшее время с Вами свяжется наш менеджер";
-            var request = new Request
-            {
-                //Id = bd
-                //RequestNumber = bd
-                RequestStatus = status,
-                DepartureCity = DepartureCity,
-                ArrivalCity = ArrivalCity,
-                ContainerSize = ContainerSize,
-                CargoWeight = CargoWeight,
-                //Price = bd TotalPrice
-                //DepartureDate = DateTime.ParseExact(DepartureDate, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString(),
-                DepartureDate = DepartureDate.ToShortDateString(),
-                RequestCreateDate = DateTime.Today.ToShortDateString(),
-                Comment = Comment
-            };
+            //var request = new Request
+            //{
+            //    //Id = bd
+            //    //RequestNumber = bd
+            //    RequestStatus = status,
+            //    DepartureCity = DepartureCity,
+            //    ArrivalCity = ArrivalCity,
+            //    ContainerSize = ContainerSize,
+            //    CargoWeight = CargoWeight,
+            //    //Price = bd TotalPrice
+            //    //DepartureDate = DateTime.ParseExact(DepartureDate, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString(),
+            //    DepartureDate = DepartureDate.ToShortDateString(),
+            //    RequestCreateDate = DateTime.Today.ToShortDateString(),
+            //    Comment = Comment
+            //};
 
-            App.Client.RequestsList.Add(request);
+            //App.Client.RequestsList.Add(request);
             ClearFields();
             App.Current.MainPage.DisplayAlert("", message, "Отлично!");
         }

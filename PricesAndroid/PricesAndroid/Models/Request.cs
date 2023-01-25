@@ -28,20 +28,23 @@ namespace PricesAndroid.Models
         public string RequestCreateDate { get; set; }
 
         public string Comment { get; set; }
+        
+        public string SearchHelper { get; set; }
 
-        //public Request(int number, StatusEnum enums, string dep, string arr, int size, int weight, int price, string depD,
-        //    string arrD, string comment = "")
-        //{
-        //    RequestNumber = number;
-        //    RequestStatus = enums;
-        //    DepartureCity = dep;
-        //    ArrivalCity = arr;
-        //    ContainerSize = size;
-        //    CargoWeight = weight;
-        //    Price = price;
-        //    DepartureDate = depD;
-        //    RequestCreateDate = arrD;
-        //    Comment = comment;
-        //}
+        public Request(int number, StatusEnum enums, string dep, string arr, string size, string weight, string price, string depD,
+            string arrD, string comment = "")
+        {
+            RequestNumber = number;
+            RequestStatus = enums;
+            DepartureCity = dep;
+            ArrivalCity = arr;
+            ContainerSize = size;
+            CargoWeight = weight;
+            Price = price;
+            DepartureDate = depD;
+            RequestCreateDate = arrD;
+            Comment = comment;
+            SearchHelper = $"{number} {dep} {arr} {size} {weight} {price} {dep} {arrD} {comment}";
+        }
     }
 }

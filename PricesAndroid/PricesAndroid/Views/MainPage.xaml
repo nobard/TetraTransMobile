@@ -31,12 +31,13 @@
                    HasShadow="False"
                    HeightRequest="49"
                    Margin="0, 0, 0, 20">
-                <Picker SelectedItem="{Binding ContainerSize}">
+                <custom:TetraPicker SelectedItem="{Binding ContainerSize}"
+                                    FontSize="16">
                     <Picker.Items>
                         <x:String>20 футов</x:String>
                         <x:String>40 футов</x:String>
                     </Picker.Items>
-                </Picker>
+                </custom:TetraPicker>
             </Frame>
 
             <StackLayout Orientation="Horizontal"
@@ -97,10 +98,21 @@
                    Padding="0, 0"
                    HasShadow="False"
                    HeightRequest="49"
-                   Margin="0, 0, 0, 36">
+                   Margin="0, 0, 0, 3">
                 <SearchBar Text="{Binding ArrivalCity}"
                            Keyboard="Text"
                            FontSize="16"/>
+            </Frame>
+            <Frame BorderColor="{StaticResource BoxesColor}"
+                   CornerRadius="5"
+                   HasShadow="False"
+                   Padding="0"
+                   Margin="0, 0, 0, 36">
+                <ListView ItemsSource="{Binding SearchResults}"
+                      SelectedItem="{Binding ArrivalCity}"
+                      SeparatorColor="#82879F"
+                      HeightRequest="{Binding ListHeight}">
+                </ListView>
             </Frame>
 
             <StackLayout Orientation="Horizontal"

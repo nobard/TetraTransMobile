@@ -67,6 +67,7 @@
     <Compile Include="SplashActivity.cs" />
     <Compile Include="TetraRenderers\TetraEditorRendererAndroid.cs" />
     <Compile Include="TetraRenderers\TetraEntryRendererAndroid.cs" />
+    <Compile Include="TetraRenderers\TetraPickerRendererAndroid.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
