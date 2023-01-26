@@ -10,7 +10,7 @@ namespace PricesAndroid
 {
     public partial class App : Application
     {
-        public static Client Client { get; set; } = new Client();
+        public static Client Client { get; set; }
 
         private static ClientDataStore clientDb;
         public static ClientDataStore ClientDb
@@ -43,7 +43,7 @@ namespace PricesAndroid
         {
             //Игнор темы системы(всегда светлая)
             //Current.UserAppTheme = OSAppTheme.Light;
-            //Client = await ClientDb.GetItemAsync("user1");
+            Client = await ClientDb.GetItemAsync("user1");
         }
 
         protected override void OnSleep()

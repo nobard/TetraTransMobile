@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -26,7 +27,7 @@ namespace PricesAndroid.Services
 
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync($"https://192.168.0.187:7181/Api/DAL/Auth/Client?data={username}"))
+                using (var response = await httpClient.GetAsync($"http://192.168.0.187:5181/Api/DAL/Auth/Client?data={username}"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     client = JsonConvert.DeserializeObject<Client>(apiResponse);
