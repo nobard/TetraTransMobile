@@ -20,7 +20,7 @@ namespace PricesAndroid.Utilities
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? StatusEnum.InProgress : StatusEnum.InProgress;
+            throw new NotImplementedException();
         }
     }
 }

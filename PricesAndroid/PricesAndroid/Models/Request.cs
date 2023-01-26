@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Text;
 using static PricesAndroid.Models.StatusEnum;
 
@@ -19,32 +21,19 @@ namespace PricesAndroid.Models
 
         public string ContainerSize { get; set; }
 
-        public string CargoWeight { get; set; }
+        public int CargoWeight { get; set; }
 
-        public string Price { get; set; }
+        public double Price { get; set; }
 
         public string DepartureDate { get; set; }
 
         public string RequestCreateDate { get; set; }
 
         public string Comment { get; set; }
-        
-        public string SearchHelper { get; set; }
 
-        public Request(int number, StatusEnum enums, string dep, string arr, string size, string weight, string price, string depD,
-            string arrD, string comment = "")
+        public string SearchHelper
         {
-            RequestNumber = number;
-            RequestStatus = enums;
-            DepartureCity = dep;
-            ArrivalCity = arr;
-            ContainerSize = size;
-            CargoWeight = weight;
-            Price = price;
-            DepartureDate = depD;
-            RequestCreateDate = arrD;
-            Comment = comment;
-            SearchHelper = $"{number} {dep} {arr} {size} {weight} {price} {dep} {arrD} {comment}";
+            get => $"{RequestNumber} {DepartureCity} {ArrivalCity} {ContainerSize} {CargoWeight} {Price} {DepartureDate} {RequestCreateDate} {Comment}";
         }
     }
 }

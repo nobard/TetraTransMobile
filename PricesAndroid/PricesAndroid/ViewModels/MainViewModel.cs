@@ -16,8 +16,16 @@ namespace PricesAndroid.ViewModels
         private readonly StatusEnum status = StatusEnum.Created;
         public DateTime MinimumDate { get; set; } = DateTime.Today;
         public DateTime DepartureDate { get; set; } = DateTime.Now;
-        public string DepartureCity { get; set; } = "ЕКАТЕРИНБУРГ";
-        public string TotalPrice { get; set; }
+        public string DepartureCity { get; set; } = "Екатеринбург";
+        private List<string> Cities { get; set; } = new List<string>();
+        private int weight;
+
+        private int totalPrice;
+        public int TotalPrice
+        {
+            get => totalPrice;
+            set => SetProperty(ref totalPrice, value);
+        }
 
         private bool isEnabledButton;
         public bool IsEnabledButton
@@ -101,8 +109,8 @@ namespace PricesAndroid.ViewModels
         public List<string> GetSearchResults(string query)
         {
             if (string.IsNullOrEmpty(query)) return new List<string>();
-            var all = new List<string>
-                { "Когалым", "Екатеринбург", "Тюмень", "Тобольск", "Курган", "Кушва", "Уренгой" };
+
+            var all = App.Cities;
 
             var newList = all
                 .Where(e => e.ToLower().Contains(query.ToLower()))
@@ -115,33 +123,38 @@ namespace PricesAndroid.ViewModels
         public void CreateRequest()
         {
             var message = "Спасибо за заявку! В ближайшее время с Вами свяжется наш менеджер";
-            //var request = new Request
-            //{
-            //    //Id = bd
-            //    //RequestNumber = bd
-            //    RequestStatus = status,
-            //    DepartureCity = DepartureCity,
-            //    ArrivalCity = ArrivalCity,
-            //    ContainerSize = ContainerSize,
-            //    CargoWeight = CargoWeight,
-            //    //Price = bd TotalPrice
-            //    //DepartureDate = DateTime.ParseExact(DepartureDate, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString(),
-            //    DepartureDate = DepartureDate.ToShortDateString(),
-            //    RequestCreateDate = DateTime.Today.ToShortDateString(),
-            //    Comment = Comment
-            //};
+            var nextId = App.AllRequests.Last().Id + 1;
+            var nextNumber = App.AllRequests.Last().RequestNumber + 1;
+            
 
-            //App.Client.RequestsList.Add(request);
+            var request = new Request
+            {
+                Id = nextId,
+                RequestNumber = nextNumber,
+                RequestStatus = status,
+                DepartureCity = DepartureCity,
+                ArrivalCity = ArrivalCity,
+                ContainerSize = ContainerSize,
+                CargoWeight = weight,
+                Price = TotalPrice,
+                //DepartureDate = DateTime.ParseExact(DepartureDate, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString(),
+                DepartureDate = DepartureDate.ToShortDateString(),
+                RequestCreateDate = DateTime.Today.ToShortDateString(),
+                Comment = Comment
+            };
+
+            App.Client.Requests.Add(request);
             ClearFields();
             App.Current.MainPage.DisplayAlert("", message, "Отлично!");
         }
 
-        private void CheckRequiredFields()
+        private async void CheckRequiredFields()
         {
             IsEnabledButton = ContainerSize?.Length > 0 && CargoWeight?.Length > 0 && ArrivalCity?.Length > 0;
             if (IsEnabledButton)
             {
-                //посчитать и вывести цену TotalPrice = бд
+                weight = (int)double.Parse(CargoWeight);
+                TotalPrice = await App.CitiesDb.GetSumAsync(weight, ArrivalCity);
             }
         }
 
@@ -152,6 +165,7 @@ namespace PricesAndroid.ViewModels
             ArrivalCity = string.Empty;
             Comment = string.Empty;
             DepartureDate = DateTime.Now;
+            TotalPrice = 0;
         }
     }
 }

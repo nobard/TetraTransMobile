@@ -8,7 +8,8 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <utilities:StatusToVisibleConverter x:Key="statusToVisible" />
+            <utilities:StatusToVisibleConverter x:Key="statusToVisible"/>
+            <utilities:ContainerWeightConverter x:Key="weightConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -140,8 +141,7 @@
                                                     <Span Text="{Binding ContainerSize}"/>
                                                     <Span Text=" | "
                                                           FontAttributes="Bold"/>
-                                                    <Span Text="{Binding CargoWeight}"/>
-                                                    <Span Text=" тонны"/>
+                                                    <Span Text="{Binding CargoWeight, Converter={StaticResource weightConverter}}"/>
                                                 </FormattedString.Spans>
                                             </FormattedString>
                                         </Label.FormattedText>

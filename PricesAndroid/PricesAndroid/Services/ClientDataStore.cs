@@ -11,15 +11,7 @@ namespace PricesAndroid.Services
 {
     public class ClientDataStore
     {
-        public Task<bool> AddItemAsync(Client item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteItemAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        private string url = "http://192.168.0.187:5181";
 
         public async Task<Client> GetItemAsync(string username)
         {
@@ -27,7 +19,7 @@ namespace PricesAndroid.Services
 
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync($"http://192.168.0.187:5181/Api/DAL/Auth/Client?data={username}"))
+                using (var response = await httpClient.GetAsync($"{url}/Api/DAL/Auth/Client?data={username}"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     client = JsonConvert.DeserializeObject<Client>(apiResponse);
@@ -35,16 +27,6 @@ namespace PricesAndroid.Services
             }
 
             return client;
-        }
-
-        public Task<IEnumerable<Client>> GetItemsAsync(bool forceRefresh = false)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> UpdateItemAsync(Client item)
-        {
-            throw new NotImplementedException();
         }
     }
 }

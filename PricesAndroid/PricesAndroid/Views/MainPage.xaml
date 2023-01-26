@@ -161,7 +161,7 @@
                         <FormattedString.Spans>
                             <Span Text="СТОИМОСТЬ:   "/>
                             <Span x:Name="PriceValue"
-                                  Text="--"/>
+                                  Text="{Binding TotalPrice}"/>
                         </FormattedString.Spans>
                     </FormattedString>
                 </Label.FormattedText>
