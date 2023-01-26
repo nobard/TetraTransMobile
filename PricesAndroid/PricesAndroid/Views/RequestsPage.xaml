@@ -6,6 +6,11 @@
              xmlns:models="clr-namespace:PricesAndroid.Models;assembly=PricesAndroid"
              x:Class="PricesAndroid.Views.RequestsPage">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <utilities:StatusToVisibleConverter x:Key="statusToVisible" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <StackLayout Padding="21, 20, 21, 0"
                  Spacing="0"
@@ -28,7 +33,6 @@
         </Frame>
 
         <CollectionView x:Name="RequestsListView"
-                        x:DataType="viewModels:RequestsViewModel"
                         SelectionMode="Single"
                         ItemsSource="{Binding RequestsList}">
             <CollectionView.ItemsLayout>
@@ -64,16 +68,9 @@
                                        HorizontalOptions="Start"
                                        HasShadow="False"
                                        CornerRadius="7"
+                                       IsVisible="{Binding Path=RequestStatus, Converter={StaticResource statusToVisible}, ConverterParameter=Done}"
                                        Padding="0"
                                        Margin="0, 0, 0, 20">
-                                    <Frame.IsVisible>
-                                        <Binding Source="." Path="RequestStatus">
-                                            <Binding.Converter>
-                                                <utilities:StatusToVisibleConverter x:TypeArguments="x:String"
-                                                    CurrStatusObject="Done"/>
-                                            </Binding.Converter>
-                                        </Binding>
-                                    </Frame.IsVisible>
                                     <Label Text="Выполнено"
                                            FontSize="14"
                                            FontAttributes="Bold"
@@ -88,16 +85,9 @@
                                        HorizontalOptions="Start"
                                        HasShadow="False"
                                        CornerRadius="7"
+                                       IsVisible="{Binding Path=RequestStatus, Converter={StaticResource statusToVisible}, ConverterParameter=InProgress}"
                                        Padding="0"
                                        Margin="0, 0, 0, 20">
-                                    <Frame.IsVisible>
-                                        <Binding Source="." Path="RequestStatus">
-                                            <Binding.Converter>
-                                                <utilities:StatusToVisibleConverter x:TypeArguments="x:String"
-                                                    CurrStatusObject="InProgress"/>
-                                            </Binding.Converter>
-                                        </Binding>
-                                    </Frame.IsVisible>
                                     <Label Text="В работе"
                                            FontSize="14"
                                            FontAttributes="Bold"
@@ -112,16 +102,9 @@
                                        HorizontalOptions="Start"
                                        HasShadow="False"
                                        CornerRadius="7"
+                                       IsVisible="{Binding Path=RequestStatus, Converter={StaticResource statusToVisible}, ConverterParameter=Created}"
                                        Padding="0"
                                        Margin="0, 0, 0, 20">
-                                    <Frame.IsVisible>
-                                        <Binding Source="." Path="RequestStatus">
-                                            <Binding.Converter>
-                                                <utilities:StatusToVisibleConverter x:TypeArguments="x:String"
-                                                    CurrStatusObject="Created"/>
-                                            </Binding.Converter>
-                                        </Binding>
-                                    </Frame.IsVisible>
                                     <Label Text="Создана"
                                            FontSize="14"
                                            FontAttributes="Bold"
