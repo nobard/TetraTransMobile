@@ -9,7 +9,8 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <utilities:StatusToVisibleConverter x:Key="statusToVisible"/>
-            <utilities:ContainerWeightConverter x:Key="weightConverter" />
+            <utilities:ContainerWeightConverter x:Key="weightConverter"/>
+            <utilities:RequestPriceConverter x:Key="reqPriceConv"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -69,7 +70,7 @@
                                        HorizontalOptions="Start"
                                        HasShadow="False"
                                        CornerRadius="7"
-                                       IsVisible="{Binding Path=RequestStatus, Converter={StaticResource statusToVisible}, ConverterParameter=Done}"
+                                       IsVisible="{Binding Path=Status, Converter={StaticResource statusToVisible}, ConverterParameter=Done}"
                                        Padding="0"
                                        Margin="0, 0, 0, 20">
                                     <Label Text="Выполнено"
@@ -86,7 +87,7 @@
                                        HorizontalOptions="Start"
                                        HasShadow="False"
                                        CornerRadius="7"
-                                       IsVisible="{Binding Path=RequestStatus, Converter={StaticResource statusToVisible}, ConverterParameter=InProgress}"
+                                       IsVisible="{Binding Path=Status, Converter={StaticResource statusToVisible}, ConverterParameter=InProgress}"
                                        Padding="0"
                                        Margin="0, 0, 0, 20">
                                     <Label Text="В работе"
@@ -103,7 +104,7 @@
                                        HorizontalOptions="Start"
                                        HasShadow="False"
                                        CornerRadius="7"
-                                       IsVisible="{Binding Path=RequestStatus, Converter={StaticResource statusToVisible}, ConverterParameter=Created}"
+                                       IsVisible="{Binding Path=Status, Converter={StaticResource statusToVisible}, ConverterParameter=Created}"
                                        Padding="0"
                                        Margin="0, 0, 0, 20">
                                     <Label Text="Создана"
@@ -139,6 +140,7 @@
                                             <FormattedString>
                                                 <FormattedString.Spans>
                                                     <Span Text="{Binding ContainerSize}"/>
+                                                    <Span Text=" футов"/>
                                                     <Span Text=" | "
                                                           FontAttributes="Bold"/>
                                                     <Span Text="{Binding CargoWeight, Converter={StaticResource weightConverter}}"/>
@@ -156,7 +158,7 @@
                                             <FormattedString>
                                                 <FormattedString.Spans>
                                                     <Span Text="Стоимость: "/>
-                                                    <Span Text="{Binding Price}"/>
+                                                    <Span Text="{Binding Price, Converter={StaticResource reqPriceConv}}"/>
                                                     <Span Text=" руб."/>
                                                 </FormattedString.Spans>
                                             </FormattedString>
@@ -200,47 +202,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-        <!--
-        <ListView x:Name="RequestsListView"
-                  CachingStrategy="RecycleElement">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout>
-                            <Frame BorderColor="{StaticResource BoxesColor}"
-                                           CornerRadius="5"
-                                           Padding="25, 25, 0, 0"
-                                           HasShadow="False"
-                                           Margin="0, 0, 0, 10">
-                                <StackLayout>
-                                    <Label FontSize="20"
-                                           Margin="0, 0, 0, 5"
-                                           TextColor="{StaticResource LightThemeTextColor}">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <FormattedString.Spans>
-                                                    <Span Text="Заявка № "/>
-                                                    <Span Text="{Binding RequestNumber}"/>
-                                                </FormattedString.Spans>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                    <Frame BackgroundColor="{StaticResource DoneStatusColor}"
-                                           CornerRadius="7"
-                                           HasShadow="False"
-                                           Margin="0, 0, 0, 20">
-                                        <Label Text="Выполнено"
-                                               FontSize="14"
-                                               TextColor="White"/>
-                                    </Frame>
-                                </StackLayout>
-                            </Frame>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        -->
     </StackLayout>
 </ContentPage>

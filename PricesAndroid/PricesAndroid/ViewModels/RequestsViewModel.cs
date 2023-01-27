@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PricesAndroid.ViewModels
 {
@@ -29,18 +31,11 @@ namespace PricesAndroid.ViewModels
         public RequestsViewModel()
         {
             RequestsList = App.Client.Requests;
-            //RequestsList = new ObservableCollection<Request>()
-            //{
-            //    new Request(1, StatusEnum.Created, "Екатеринбург", "Бугульма", "20", 2, 20000, "15.09.22",
-            //        "09.12.22"),
-            //    new Request(2, StatusEnum.Done, "Когалым", "Сургут", "40", 3, 30000, "01.10.22", "15.11.22"),
-            //    new Request(3, StatusEnum.InProgress, "Тюмень", "Тобольск", "20", 10, 9000, "25.09.22", "09.11.22")
-            //};
+            Task.Run(() => Refresh());
         }
 
         public ObservableCollection<Request> GetSearchResults(string query)
         {
-            //if (string.IsNullOrEmpty(query)) return new List<string>();
             var allRequests = App.Client.Requests;
 
             var newList = allRequests
@@ -48,6 +43,24 @@ namespace PricesAndroid.ViewModels
                 .ToList();
 
             return new ObservableCollection<Request>(newList);
+        }
+
+        private async void Refresh()
+        {
+            var b = new List<Request>(App.Client.Requests);
+
+            App.Client.Requests = (await App.ClientDb.GetItemAsync("user1")).Requests;
+            var a = App.Client.Requests;
+
+            if (a.Count > RequestsList.Count) RequestsList = a;
+
+            foreach (var e in b)
+            {
+                if(a.Single(x => x.Id == e.Id).Status != e.Status) RequestsList = App.Client.Requests;
+            }
+
+            await Task.Delay(1000);
+            Refresh();
         }
     }
 }

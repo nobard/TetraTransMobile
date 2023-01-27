@@ -3,7 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:PricesAndroid.ViewModels;assembly=PricesAndroid"
              xmlns:custom="clr-namespace:PricesAndroid.TetraControls;assembly=PricesAndroid"
+             xmlns:utilities="clr-namespace:PricesAndroid.Utilities;assembly=PricesAndroid"
              x:Class="PricesAndroid.Views.MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <utilities:TotalPriceConverter x:Key="priceConv"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ScrollView>
         <StackLayout Padding="21"
@@ -161,7 +168,7 @@
                         <FormattedString.Spans>
                             <Span Text="СТОИМОСТЬ:   "/>
                             <Span x:Name="PriceValue"
-                                  Text="{Binding TotalPrice}"/>
+                                  Text="{Binding TotalPrice, Converter={StaticResource priceConv}}"/>
                         </FormattedString.Spans>
                     </FormattedString>
                 </Label.FormattedText>

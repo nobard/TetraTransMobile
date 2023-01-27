@@ -62,8 +62,6 @@ namespace PricesAndroid
 
             var allRequests = await RequestsDb.GetAllRequestsAsync();
             AllRequests = allRequests ?? new List<Request>();
-            //var list = await RequestsDb.GetRequestsAsync(Client.Id);
-            //Client.Requests = new ObservableCollection<Request>(list);
         }
 
         protected override void OnSleep()

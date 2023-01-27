@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using PricesAndroid.Models;
 using PricesAndroid.Utilities;
@@ -120,30 +121,49 @@ namespace PricesAndroid.ViewModels
             return newList.Count == 1 && newList.First().ToLower() == query.ToLower() ? new List<string>() : newList;
         }
 
-        public void CreateRequest()
+        public async Task CreateRequest()
         {
             var message = "Спасибо за заявку! В ближайшее время с Вами свяжется наш менеджер";
             var nextId = App.AllRequests.Last().Id + 1;
             var nextNumber = App.AllRequests.Last().RequestNumber + 1;
-            
+            var today = DateTime.Today;
 
             var request = new Request
             {
                 Id = nextId,
                 RequestNumber = nextNumber,
-                RequestStatus = status,
+                Status = status,
                 DepartureCity = DepartureCity,
                 ArrivalCity = ArrivalCity,
-                ContainerSize = ContainerSize,
+                ContainerSize = int.Parse(ContainerSize.Split(' ')[0]),
                 CargoWeight = weight,
                 Price = TotalPrice,
-                //DepartureDate = DateTime.ParseExact(DepartureDate, "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString(),
-                DepartureDate = DepartureDate.ToShortDateString(),
-                RequestCreateDate = DateTime.Today.ToShortDateString(),
-                Comment = Comment
+                DepartureDate = String.Format("{0:d2}.{1:d2}.{2}", DepartureDate.Day, DepartureDate.Month, (DepartureDate.Year % 100)),
+                RequestCreateDate = String.Format("{0:d2}.{1:d2}.{2}", today.Day, today.Month, (today.Year % 100)),
+                Comment = Comment ?? "",
+                ClientId = App.Client.Id
+            };
+
+
+            var requestDomain = new RequestDomain
+            {
+                Id = nextId,
+                RequestNumber = nextNumber,
+                Status = status,
+                DepartureCity = DepartureCity,
+                ArrivalCity = ArrivalCity,
+                ContainerSize = int.Parse(ContainerSize.Split(' ')[0]),
+                CargoWeight = weight,
+                Price = TotalPrice,
+                DepartureDate = String.Format("{0:d2}.{1:d2}.{2}", DepartureDate.Day, DepartureDate.Month, (DepartureDate.Year % 100)),
+                RequestCreateDate = String.Format("{0:d2}.{1:d2}.{2}", today.Day, today.Month, (today.Year % 100)),
+                Comment = Comment ?? "",
+                ClientId = App.Client.Id,
             };
 
             App.Client.Requests.Add(request);
+            App.AllRequests.Add(request);
+            await App.RequestsDb.AddRequestAsync(requestDomain);
             ClearFields();
             App.Current.MainPage.DisplayAlert("", message, "Отлично!");
         }
@@ -153,7 +173,7 @@ namespace PricesAndroid.ViewModels
             IsEnabledButton = ContainerSize?.Length > 0 && CargoWeight?.Length > 0 && ArrivalCity?.Length > 0;
             if (IsEnabledButton)
             {
-                weight = (int)double.Parse(CargoWeight);
+                weight = (int)double.Parse(CargoWeight); 
                 TotalPrice = await App.CitiesDb.GetSumAsync(weight, ArrivalCity);
             }
         }

@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
-using PricesAndroid.Models;
 using Xamarin.Forms;
 
 namespace PricesAndroid.Utilities
 {
-    public class StatusToVisibleConverter : IValueConverter
+    public class RequestPriceConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (Enum.TryParse<StatusEnum>((string)parameter, out var status)) return (StatusEnum)value == status;
+            if (double.TryParse(value.ToString(), out var result)) return (int)result;
 
-            return false;
+            return value.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
