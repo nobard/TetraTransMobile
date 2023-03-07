@@ -15,6 +15,8 @@ namespace PricesAndroid.ViewModels
     public class MainViewModel : BaseViewModel
     {
         private readonly StatusEnum status = StatusEnum.Created;
+
+        #region PROPERTIES
         public DateTime MinimumDate { get; set; } = DateTime.Today;
         public DateTime DepartureDate { get; set; } = DateTime.Now;
         public string DepartureCity { get; set; } = "Екатеринбург";
@@ -93,6 +95,7 @@ namespace PricesAndroid.ViewModels
             get => listHeight;
             set => SetProperty(ref listHeight, value);
         }
+        #endregion
 
         #region COMMANDS
 
@@ -144,26 +147,9 @@ namespace PricesAndroid.ViewModels
                 ClientId = App.Client.Id
             };
 
-
-            var requestDomain = new RequestDomain
-            {
-                Id = nextId,
-                RequestNumber = nextNumber,
-                Status = status,
-                DepartureCity = DepartureCity,
-                ArrivalCity = ArrivalCity,
-                ContainerSize = int.Parse(ContainerSize.Split(' ')[0]),
-                CargoWeight = weight,
-                Price = TotalPrice,
-                DepartureDate = String.Format("{0:d2}.{1:d2}.{2}", DepartureDate.Day, DepartureDate.Month, (DepartureDate.Year % 100)),
-                RequestCreateDate = String.Format("{0:d2}.{1:d2}.{2}", today.Day, today.Month, (today.Year % 100)),
-                Comment = Comment ?? "",
-                ClientId = App.Client.Id,
-            };
-
             App.Client.Requests.Add(request);
             App.AllRequests.Add(request);
-            await App.RequestsDb.AddRequestAsync(requestDomain);
+            await App.RequestsDb.AddRequestAsync(request);
             ClearFields();
             App.Current.MainPage.DisplayAlert("", message, "Отлично!");
         }
@@ -171,6 +157,7 @@ namespace PricesAndroid.ViewModels
         private async void CheckRequiredFields()
         {
             IsEnabledButton = ContainerSize?.Length > 0 && CargoWeight?.Length > 0 && ArrivalCity?.Length > 0;
+
             if (IsEnabledButton)
             {
                 weight = (int)double.Parse(CargoWeight); 

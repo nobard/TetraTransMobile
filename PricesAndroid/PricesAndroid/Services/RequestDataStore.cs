@@ -29,7 +29,7 @@ namespace PricesAndroid.Services
             return requests ?? new List<Request>();
         }
 
-        public async Task AddRequestAsync(RequestDomain req)
+        public async Task AddRequestAsync(Request req)
         {
             using (var httpClient = new HttpClient())
             {

@@ -50,7 +50,6 @@ namespace PricesAndroid
             MainPage = new AppShell();
         }
 
-
         protected override async void OnStart()
         {
             //Игнор темы системы(всегда светлая)

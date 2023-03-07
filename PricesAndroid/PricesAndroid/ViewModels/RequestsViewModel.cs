@@ -31,7 +31,6 @@ namespace PricesAndroid.ViewModels
         public RequestsViewModel()
         {
             RequestsList = App.Client.Requests;
-            Task.Run(() => Refresh());
         }
 
         public ObservableCollection<Request> GetSearchResults(string query)
@@ -43,24 +42,6 @@ namespace PricesAndroid.ViewModels
                 .ToList();
 
             return new ObservableCollection<Request>(newList);
-        }
-
-        private async void Refresh()
-        {
-            var b = new List<Request>(App.Client.Requests);
-
-            App.Client.Requests = (await App.ClientDb.GetItemAsync("user1")).Requests;
-            var a = App.Client.Requests;
-
-            if (a.Count > RequestsList.Count) RequestsList = a;
-
-            foreach (var e in b)
-            {
-                if(a.Single(x => x.Id == e.Id).Status != e.Status) RequestsList = App.Client.Requests;
-            }
-
-            await Task.Delay(1000);
-            Refresh();
         }
     }
 }

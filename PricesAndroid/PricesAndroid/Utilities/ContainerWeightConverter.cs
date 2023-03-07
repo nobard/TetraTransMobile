@@ -15,7 +15,10 @@ namespace PricesAndroid.Utilities
             var lastDigits = weight % 100;
 
             if (lastDigit == 1 && lastDigits != 11) return $"{weight} тонна";
-            if ((lastDigit == 2 || lastDigit == 3 || lastDigit == 4) && (lastDigits != 12 && lastDigits != 13 && lastDigits != 14)) return $"{weight} тонны";
+
+            if ((lastDigit == 2 || lastDigit == 3 || lastDigit == 4) 
+                && (lastDigits != 12 && lastDigits != 13 && lastDigits != 14)) 
+                return $"{weight} тонны";
 
             return $"{weight} тонн";
         }
