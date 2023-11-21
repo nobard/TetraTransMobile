@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace PricesAndroid.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public abstract class BaseViewModel : INotifyPropertyChanged
     {
         protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
@@ -14,6 +12,7 @@ namespace PricesAndroid.ViewModels
 
             field = value;
             OnPropertyChanged(propertyName);
+
             return true;
         }
 

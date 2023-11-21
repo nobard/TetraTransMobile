@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
-namespace PricesAndroid.Utilities
+namespace PricesAndroid.Utilities.Converters
 {
-    public class TotalPriceConverter : IValueConverter
+    public class RequestPriceConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((int)value == 0) return "--";
+            if (double.TryParse(value.ToString(), out var result)) return (int)result;
 
-            return $"{value.ToString()} руб.";
+            return value.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

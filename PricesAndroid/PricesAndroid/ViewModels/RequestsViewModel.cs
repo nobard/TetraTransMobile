@@ -6,40 +6,42 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PricesAndroid.Services;
 
 namespace PricesAndroid.ViewModels
 {
     public class RequestsViewModel : BaseViewModel
     {
-        private ObservableCollection<Request> requestsList;
+        private ObservableCollection<Request> _requestsList;
+        private string _searchQuery;
+
         public ObservableCollection<Request> RequestsList
         {
-            get => requestsList;
-            set => SetProperty(ref requestsList, value);
+            get => _requestsList;
+            set => SetProperty(ref _requestsList, value);
         }
 
-        private string searchQuery;
         public string SearchQuery
         {
-            get => searchQuery;
+            get => _searchQuery;
             set
             {
                 RequestsList = GetSearchResults(value);
             }
         }
 
-        public RequestsViewModel()
+        private Client user;
+
+        public RequestsViewModel(Client user)
         {
-            RequestsList = App.Client.Requests;
+            this.user = user;
+            RequestsList = new ObservableCollection<Request>(user.Requests ?? new List<Request>());
         }
 
         public ObservableCollection<Request> GetSearchResults(string query)
         {
-            var allRequests = App.Client.Requests;
-
-            var newList = allRequests
-                .Where(e => e.SearchHelper.ToLower().Contains(query.ToLower()))
-                .ToList();
+            var newList = RequestsList
+                .Where(e => e.SearchHelper.ToLower().Contains(query.ToLower()));
 
             return new ObservableCollection<Request>(newList);
         }

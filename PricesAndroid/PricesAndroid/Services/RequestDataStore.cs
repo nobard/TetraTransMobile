@@ -7,37 +7,56 @@ using System.Threading.Tasks;
 using PricesAndroid.Models;
 using Newtonsoft.Json;
 using System.Net.Http.Json;
+using PricesAndroid.Services.Interfaces;
 
 namespace PricesAndroid.Services
 {
-    public class  RequestDataStore
+    public class  RequestDataStore : IDataStore<Request>
     {
-        private string url = "http://192.168.0.187:5181";
+        private string url;
 
-        public async Task<List<Request>> GetAllRequestsAsync()
+        public RequestDataStore(string url)
         {
-            List<Request> requests;
+            this.url = url;
+        }
+
+        public async Task<bool> AddItemAsync(Request item)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PostAsJsonAsync($"{url}/Api/DAL/Requests/AddRequest", item))
+                {
+                    return response.IsSuccessStatusCode;
+                }
+            }
+        }
+
+        public async Task<IEnumerable<Request>> GetItemsAsync(bool forceRefresh = false)
+        {
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync($"{url}/Api/DAL/Requests/GetAllRequests"))
                 {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    requests = JsonConvert.DeserializeObject<List<Request>>(apiResponse);
+                    var apiResponse = await response.Content.ReadAsStringAsync();
+
+                    return JsonConvert.DeserializeObject<IEnumerable<Request>>(apiResponse);
                 }
             }
-
-            return requests ?? new List<Request>();
         }
 
-        public async Task AddRequestAsync(Request req)
+        public Task<bool> UpdateItemAsync(Request item)
         {
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.PostAsJsonAsync($"{url}/Api/DAL/Requests/AddRequest", req))
-                {
-                    string apiResponse = await response?.Content.ReadAsStringAsync();
-                }
-            }
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteItemAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Request> GetItemAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

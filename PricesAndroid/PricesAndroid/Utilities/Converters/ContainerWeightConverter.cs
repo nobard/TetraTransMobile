@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
-namespace PricesAndroid.Utilities
+namespace PricesAndroid.Utilities.Converters
 {
     public class ContainerWeightConverter : IValueConverter
     {
@@ -16,8 +14,8 @@ namespace PricesAndroid.Utilities
 
             if (lastDigit == 1 && lastDigits != 11) return $"{weight} тонна";
 
-            if ((lastDigit == 2 || lastDigit == 3 || lastDigit == 4) 
-                && (lastDigits != 12 && lastDigits != 13 && lastDigits != 14)) 
+            if ((lastDigit == 2 || lastDigit == 3 || lastDigit == 4)
+                && lastDigits != 12 && lastDigits != 13 && lastDigits != 14)
                 return $"{weight} тонны";
 
             return $"{weight} тонн";
