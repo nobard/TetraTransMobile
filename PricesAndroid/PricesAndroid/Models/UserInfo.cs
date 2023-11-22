@@ -2,7 +2,7 @@
 
 namespace PricesAndroid.Models
 {
-    public class Client
+    public class UserInfo
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -12,8 +12,7 @@ namespace PricesAndroid.Models
         public string Email { get; set; }
         public string Company { get; set; }
         public string INN { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public string PasswordHash { get; set; }
 
         //проверить, будет ли ошибка NullRefEx -- да, будет
         public IEnumerable<Request> Requests { get; set; }

@@ -6,11 +6,11 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PricesAndroid.Services
+namespace PricesAndroid.Services.TetraServices
 {
     public class PriceDefiner : IPriceDefiner
     {
-        private string url;
+        private readonly string url;
 
         public PriceDefiner(string url)
         {

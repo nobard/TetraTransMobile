@@ -98,7 +98,7 @@ namespace PricesAndroid.ViewModels
         private IDataStore<string> citiesDataStore;
         private IPriceDefiner priceDefiner;
         private IEnumerable<string> cities;
-        private Client user;
+        private UserInfo user;
 
         #endregion
 
@@ -110,12 +110,18 @@ namespace PricesAndroid.ViewModels
 
         #endregion
 
-        public MainViewModel(IDataStore<Request> reqDS, IDataStore<string> citiesDS, IPriceDefiner priceDef, Client user)
+        public MainViewModel(IDataStore<Request> reqDS, IDataStore<string> citiesDS, IPriceDefiner priceDef)
         {
             requestDataStore = reqDS;
             citiesDataStore = citiesDS;
             priceDefiner = priceDef;
-            this.user = user;
+            
+            App.UserChanged += OnUserChanged;
+        }
+
+        private void OnUserChanged(UserChangedEventArgs args)
+        {
+            user = args.NewUserInfo;
         }
 
         private List<string> GetSearchResults(string query)

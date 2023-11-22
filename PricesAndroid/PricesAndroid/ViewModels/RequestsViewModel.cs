@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Bson;
 using PricesAndroid.Services;
 
 namespace PricesAndroid.ViewModels
@@ -30,12 +31,11 @@ namespace PricesAndroid.ViewModels
             }
         }
 
-        private Client user;
+        private UserInfo user;
 
-        public RequestsViewModel(Client user)
+        public RequestsViewModel()
         {
-            this.user = user;
-            RequestsList = new ObservableCollection<Request>(user.Requests ?? new List<Request>());
+            App.UserChanged += OnUserChanged;
         }
 
         public ObservableCollection<Request> GetSearchResults(string query)
@@ -44,6 +44,24 @@ namespace PricesAndroid.ViewModels
                 .Where(e => e.SearchHelper.ToLower().Contains(query.ToLower()));
 
             return new ObservableCollection<Request>(newList);
+        }
+
+        private void RefreshRequests()
+        {
+            if (user.Requests == null)
+            {
+                RequestsList = new ObservableCollection<Request>();
+                return;
+            }
+
+            RequestsList = new ObservableCollection<Request>(user.Requests);
+        }
+
+        private void OnUserChanged(UserChangedEventArgs args)
+        {
+            user = args.NewUserInfo;
+
+            RefreshRequests();
         }
     }
 }
