@@ -1,78 +1,52 @@
-﻿using PricesAndroid.Views;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using PricesAndroid.Models;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using PricesAndroid.Services;
-using PricesAndroid.Utilities.RouteFactories;
+using PricesAndroid.Services.DI;
 using PricesAndroid.Services.Interfaces;
-using PricesAndroid.ViewModels;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace PricesAndroid
 {
+    public class UserChangedEventArgs
+    {
+        public UserInfo NewUserInfo { get; }
+
+        public UserChangedEventArgs(UserInfo newUserInfo)
+        {
+            NewUserInfo = newUserInfo;
+        }
+    }
+
     public partial class App : Application
     {
-        //public static Client Client { get; set; }
-        //public static List<string> Cities { get; set; }
-        //public static List<Request> AllRequests { get; set; }
+        public delegate void UserChangedEventHandler(UserChangedEventArgs args);
+        public static event UserChangedEventHandler UserChanged;
 
-        //private static ClientDataStore clientDb;
-        //public static ClientDataStore ClientDb
-        //{
-        //    get
-        //    {
-        //        return clientDb = clientDb ?? new ClientDataStore();
-        //    }
-        //}
+        private UserInfo _userInfo;
+        public UserInfo UserInfo
+        {
+            get => _userInfo;
+            set
+            {
+                if(value == _userInfo) return;
 
-        //private static RequestDataStore requestsDb;
-        //public static RequestDataStore RequestsDb
-        //{
-        //    get
-        //    {
-        //        return requestsDb = requestsDb ?? new RequestDataStore();
-        //    }
-        //}
+                _userInfo = value;
+                UserChanged?.Invoke(new UserChangedEventArgs(value));
+            }
+        }
 
-        //private static CitiesDataStore citiesDb;
-        //public static CitiesDataStore CitiesDb
-        //{
-        //    get
-        //    {
-        //        return citiesDb = citiesDb ?? new CitiesDataStore();
-        //    }
-        //}
+        private readonly IContainer container;
 
         public App()
         {
-
             InitializeComponent();
 
-            var url = "http://192.168.0.187:5181";
+            container = AutofacConfig.GetConfiguredContainer();
+            // установка сопоставителя зависимостей
+            DependencyResolver.ResolveUsing(type => container.IsRegistered(type) ? container.Resolve(type) : null);
 
-
-            var reqDS = new RequestDataStore(url);
-            var userDS = new ClientDataStore(url);
-            var citiesDS = new CitiesDataStore(url);
-            var priceDef = new PriceDefiner(url);
-            var client = new Client();
-
-
-            var builder = new ContainerBuilder();
-
-            builder.RegisterType<RequestDataStore>().As<IDataStore<Request>>();
-            builder.RegisterType<CitiesDataStore>().As<IDataStore<string>>();
-
-            var mainPageFac = new MainPageRouteFactory(new MainViewModel(reqDS, citiesDS, priceDef, client));
-            var reqFac = new RequestsPageRouteFactory(new RequestsViewModel(client));
-            var userFac = new UserProfilePageRouteFactory(new UserProfileViewModel(client));
-            
-            MainPage = new AppShell(mainPageFac, reqFac, userFac);
+            MainPage = DependencyService.Resolve<AppShell>();
         }
 
         protected override async void OnStart()
@@ -80,13 +54,10 @@ namespace PricesAndroid
             //Игнор темы системы(всегда светлая)
             Current.UserAppTheme = OSAppTheme.Light;
 
-            //Client = await ClientDb.GetItemAsync("user1");
-
-            //var cities = await CitiesDb.GetCitiesAsync();
-            //Cities = cities ?? new List<string>();
-
-            //var allRequests = await RequestsDb.GetAllRequestsAsync();
-            //AllRequests = allRequests ?? new List<Request>();
+            Task.Run(() =>
+            {
+                UserInfo = DependencyService.Resolve<IAuthService>().GetUserAsync(1).Result;
+            });
         }
 
         protected override void OnSleep()

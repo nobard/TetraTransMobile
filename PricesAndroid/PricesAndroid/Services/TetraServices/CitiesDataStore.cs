@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace PricesAndroid.Services
+namespace PricesAndroid.Services.TetraServices
 {
     public class CitiesDataStore : IDataStore<string>
     {
-        private string url;
+        private readonly string url;
 
         public CitiesDataStore(string url)
         {

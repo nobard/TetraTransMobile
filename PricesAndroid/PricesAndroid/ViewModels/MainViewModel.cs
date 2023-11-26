@@ -94,11 +94,11 @@ namespace PricesAndroid.ViewModels
         public string DepartureCity { get; set; } = "Екатеринбург";
         
         private int weight;
-        private IDataStore<Request> requestDataStore;
-        private IDataStore<string> citiesDataStore;
-        private IPriceDefiner priceDefiner;
+        private readonly IRequestService requestService;
+        private readonly ICitiesService citiesService;
+        private readonly IPriceDefiner priceDefiner;
         private IEnumerable<string> cities;
-        private Client user;
+        private UserInfo user;
 
         #endregion
 
@@ -110,12 +110,20 @@ namespace PricesAndroid.ViewModels
 
         #endregion
 
-        public MainViewModel(IDataStore<Request> reqDS, IDataStore<string> citiesDS, IPriceDefiner priceDef, Client user)
+        public MainViewModel(IRequestService reqService, ICitiesService citService, IPriceDefiner priceDef)
         {
-            requestDataStore = reqDS;
-            citiesDataStore = citiesDS;
+            requestService = reqService;
+            citiesService = citService;
             priceDefiner = priceDef;
-            this.user = user;
+
+            Task.Run(() => cities = citiesService.GetCitiesAsync().Result);
+            
+            App.UserChanged += OnUserChanged;
+        }
+
+        private void OnUserChanged(UserChangedEventArgs args)
+        {
+            user = args.NewUserInfo;
         }
 
         private List<string> GetSearchResults(string query)
@@ -124,7 +132,7 @@ namespace PricesAndroid.ViewModels
 
             if (cities == null)
             {
-                cities = citiesDataStore.GetItemsAsync().Result;
+                Task.Run(() => cities = citiesService.GetCitiesAsync().Result);
 
                 return new List<string>();
             }
@@ -139,7 +147,7 @@ namespace PricesAndroid.ViewModels
 
         public async Task CreateRequest()
         {
-            var allReq = await requestDataStore.GetItemsAsync();
+            var allReq = (await requestService.GetRequestsAsync()).ToList();
             var nextId = allReq.Last().Id + 1;
             var nextNumber = allReq.Last().RequestNumber + 1;
             var today = DateTime.Today;
@@ -160,7 +168,7 @@ namespace PricesAndroid.ViewModels
                 ClientId = user.Id
             };
 
-            var addStatus = await requestDataStore.AddItemAsync(request);
+            var addStatus = await requestService.CreateRequestAsync(request);
 
             if (addStatus)
             {

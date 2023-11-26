@@ -17,7 +17,9 @@ namespace PricesAndroid
         public Element ProfilePageContent
             => Routing.GetOrCreateContent(nameof(UserProfilePage));
 
-        public AppShell(MainPageRouteFactory mainPageFac, RequestsPageRouteFactory reqPageFac, UserProfilePageRouteFactory userPageFac)
+        public AppShell(MainPageRouteFactory mainPageFac,
+            RequestsPageRouteFactory reqPageFac,
+            UserProfilePageRouteFactory userPageFac)
         {
             InitializeComponent();
 

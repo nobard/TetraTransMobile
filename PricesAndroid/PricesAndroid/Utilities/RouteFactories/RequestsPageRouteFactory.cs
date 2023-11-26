@@ -1,23 +1,20 @@
-﻿using PricesAndroid.ViewModels;
-using PricesAndroid.Views;
+﻿using PricesAndroid.Views;
 using Xamarin.Forms;
 
 namespace PricesAndroid.Utilities.RouteFactories
 {
     public class RequestsPageRouteFactory : RouteFactory
     {
-        private readonly RequestsViewModel viewModel;
+        private readonly RequestsPage page;
 
-        public RequestsPageRouteFactory(RequestsViewModel vm)
+        public RequestsPageRouteFactory(RequestsPage page)
         {
-            viewModel = vm;
+            this.page = page;
         }
 
         public override Element GetOrCreate()
         {
-            var elem = new RequestsPage(viewModel);
-
-            return elem;
+            return page;
         }
     }
 }

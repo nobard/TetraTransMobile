@@ -9,11 +9,11 @@ using Newtonsoft.Json;
 using System.Net.Http.Json;
 using PricesAndroid.Services.Interfaces;
 
-namespace PricesAndroid.Services
+namespace PricesAndroid.Services.TetraServices
 {
-    public class  RequestDataStore : IDataStore<Request>
+    public class RequestDataStore : IDataStore<Request>
     {
-        private string url;
+        private readonly string url;
 
         public RequestDataStore(string url)
         {

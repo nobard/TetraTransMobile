@@ -3,6 +3,10 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using AndroidX.AppCompat.App;
+using Autofac;
+using PricesAndroid.Services.DI;
+using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace PricesAndroid.Droid
 {
@@ -18,6 +22,7 @@ namespace PricesAndroid.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
             LoadApplication(new App());
         }
 
