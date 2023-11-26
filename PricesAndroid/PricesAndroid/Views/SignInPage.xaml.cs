@@ -1,14 +1,15 @@
 ﻿using PricesAndroid.ViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace PricesAndroid.Views
 {
-    public partial class MainPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class SignInPage : ContentPage
     {
-        public MainPage(MainViewModel vm)
+        public SignInPage(SignInViewModel vm)
         {
             InitializeComponent();
-
             BindingContext = vm;
         }
     }

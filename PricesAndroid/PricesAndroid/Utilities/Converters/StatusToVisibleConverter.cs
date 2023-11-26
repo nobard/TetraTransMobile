@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PricesAndroid.Models;
+using System;
 using System.Globalization;
-using System.Text;
-using PricesAndroid.Models;
 using Xamarin.Forms;
 
-namespace PricesAndroid.Utilities
+namespace PricesAndroid.Utilities.Converters
 {
     public class StatusToVisibleConverter : IValueConverter
     {

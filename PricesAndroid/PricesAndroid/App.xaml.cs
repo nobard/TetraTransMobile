@@ -1,66 +1,63 @@
-﻿using PricesAndroid.Views;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
+﻿using Autofac;
 using PricesAndroid.Models;
+using PricesAndroid.Services.DI;
+using PricesAndroid.Services.Interfaces;
+using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using PricesAndroid.Services;
+using Xamarin.Forms.Internals;
 
 namespace PricesAndroid
 {
+    public class UserChangedEventArgs
+    {
+        public UserInfo NewUserInfo { get; }
+
+        public UserChangedEventArgs(UserInfo newUserInfo)
+        {
+            NewUserInfo = newUserInfo;
+        }
+    }
+
     public partial class App : Application
     {
-        public static Client Client { get; set; }
-        public static List<string> Cities { get; set; }
-        public static List<Request> AllRequests { get; set; }
+        public delegate void UserChangedEventHandler(UserChangedEventArgs args);
+        public static event UserChangedEventHandler UserChanged;
 
-        private static ClientDataStore clientDb;
-        public static ClientDataStore ClientDb
+        private UserInfo _userInfo;
+        public UserInfo UserInfo
         {
-            get
+            get => _userInfo;
+            set
             {
-                return clientDb = clientDb ?? new ClientDataStore();
+                if(value == _userInfo) return;
+
+                _userInfo = value;
+                UserChanged?.Invoke(new UserChangedEventArgs(value));
             }
         }
 
-        private static RequestDataStore requestsDb;
-        public static RequestDataStore RequestsDb
-        {
-            get
-            {
-                return requestsDb = requestsDb ?? new RequestDataStore();
-            }
-        }
-
-        private static CitiesDataStore citiesDb;
-        public static CitiesDataStore CitiesDb
-        {
-            get
-            {
-                return citiesDb = citiesDb ?? new CitiesDataStore();
-            }
-        }
+        private readonly IContainer container;
 
         public App()
         {
             InitializeComponent();
-            
-            MainPage = new AppShell();
+
+            container = AutofacConfig.GetConfiguredContainer();
+            // установка сопоставителя зависимостей
+            DependencyResolver.ResolveUsing(type => container.IsRegistered(type) ? container.Resolve(type) : null);
+
+            MainPage = DependencyService.Resolve<AppShell>();
         }
 
         protected override async void OnStart()
         {
             //Игнор темы системы(всегда светлая)
-            //Current.UserAppTheme = OSAppTheme.Light;
-            Client = await ClientDb.GetItemAsync("user1");
+            Current.UserAppTheme = OSAppTheme.Light;
 
-            var cities = await CitiesDb.GetCitiesAsync();
-            Cities = cities ?? new List<string>();
-
-            var allRequests = await RequestsDb.GetAllRequestsAsync();
-            AllRequests = allRequests ?? new List<Request>();
+            Task.Run(() =>
+            {
+                UserInfo = DependencyService.Resolve<IAuthService>().GetUserAsync(1).Result;
+            });
         }
 
         protected override void OnSleep()

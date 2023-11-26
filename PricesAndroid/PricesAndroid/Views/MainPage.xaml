@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:PricesAndroid.ViewModels;assembly=PricesAndroid"
              xmlns:custom="clr-namespace:PricesAndroid.TetraControls;assembly=PricesAndroid"
-             xmlns:utilities="clr-namespace:PricesAndroid.Utilities;assembly=PricesAndroid"
+             xmlns:converters="clr-namespace:PricesAndroid.Utilities.Converters;assembly=PricesAndroid"
              x:Class="PricesAndroid.Views.MainPage">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <utilities:TotalPriceConverter x:Key="priceConv"/>
+            <converters:TotalPriceConverter x:Key="priceConv"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 

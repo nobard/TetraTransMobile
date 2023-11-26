@@ -1,16 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:PricesAndroid.ViewModels;assembly=PricesAndroid"
-             xmlns:utilities="clr-namespace:PricesAndroid.Utilities;assembly=PricesAndroid"
-             xmlns:models="clr-namespace:PricesAndroid.Models;assembly=PricesAndroid"
+             xmlns:converters="clr-namespace:PricesAndroid.Utilities.Converters;assembly=PricesAndroid"
              x:Class="PricesAndroid.Views.RequestsPage">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <utilities:StatusToVisibleConverter x:Key="statusToVisible"/>
-            <utilities:ContainerWeightConverter x:Key="weightConverter"/>
-            <utilities:RequestPriceConverter x:Key="reqPriceConv"/>
+            <converters:StatusToVisibleConverter x:Key="statusToVisible"/>
+            <converters:ContainerWeightConverter x:Key="weightConverter"/>
+            <converters:RequestPriceConverter x:Key="reqPriceConv"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
