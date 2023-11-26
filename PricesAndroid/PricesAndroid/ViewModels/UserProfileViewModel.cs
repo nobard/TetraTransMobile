@@ -4,7 +4,7 @@ namespace PricesAndroid.ViewModels
 {
     public class UserProfileViewModel : BaseViewModel
     {
-        private UserInfo user;
+        private UserInfo _user;
 
         public UserProfileViewModel()
         {
@@ -13,7 +13,7 @@ namespace PricesAndroid.ViewModels
 
         private void OnUserChanged(UserChangedEventArgs args)
         {
-            user = args.NewUserInfo;
+            _user = args.NewUserInfo;
         }
     }
 }

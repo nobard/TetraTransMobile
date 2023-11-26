@@ -1,18 +1,10 @@
-﻿using PricesAndroid.Views;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using PricesAndroid.Models;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using PricesAndroid.Utilities.RouteFactories;
+using PricesAndroid.Services.DI;
 using PricesAndroid.Services.Interfaces;
-using PricesAndroid.ViewModels;
-using PricesAndroid.Services.TetraServices;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace PricesAndroid
 {
@@ -31,60 +23,41 @@ namespace PricesAndroid
         public delegate void UserChangedEventHandler(UserChangedEventArgs args);
         public static event UserChangedEventHandler UserChanged;
 
-        private UserInfo userInfo;
-
+        private UserInfo _userInfo;
         public UserInfo UserInfo
         {
-            get => userInfo;
+            get => _userInfo;
             set
             {
-                if(value == userInfo) return;
+                if(value == _userInfo) return;
 
-                userInfo = value;
+                _userInfo = value;
                 UserChanged?.Invoke(new UserChangedEventArgs(value));
             }
         }
 
-        public App(IAuthService authService)
+        private readonly IContainer container;
+
+        public App()
         {
             InitializeComponent();
 
-            var url = "http://192.168.0.187:5181";
+            container = AutofacConfig.GetConfiguredContainer();
+            // установка сопоставителя зависимостей
+            DependencyResolver.ResolveUsing(type => container.IsRegistered(type) ? container.Resolve(type) : null);
 
-            var reqDS = new RequestDataStore(url);
-            var citiesDS = new CitiesDataStore(url);
-            var priceDef = new PriceDefiner(url);
-
-            Task.Run(() =>
-            {
-                UserInfo = clientDS.GetItemAsync(1).Result;
-            });
-
-            var builder = new ContainerBuilder();
-
-            builder.RegisterType<RequestDataStore>().As<IDataStore<Request>>();
-            builder.RegisterType<CitiesDataStore>().As<IDataStore<string>>();
-
-            var mainPageFac = new MainPageRouteFactory(new MainViewModel(reqDS, citiesDS, priceDef));
-            var reqFac = new RequestsPageRouteFactory(new RequestsViewModel());
-            var userFac = new UserProfilePageRouteFactory(new UserProfileViewModel());
-            
-            MainPage = new AppShell(mainPageFac, reqFac, userFac);
+            MainPage = DependencyService.Resolve<AppShell>();
         }
 
         protected override async void OnStart()
         {
             //Игнор темы системы(всегда светлая)
             Current.UserAppTheme = OSAppTheme.Light;
-            
 
-            //Client = await ClientDb.GetItemAsync("user1");
-
-            //var cities = await CitiesDb.GetCitiesAsync();
-            //Cities = cities ?? new List<string>();
-
-            //var allRequests = await RequestsDb.GetAllRequestsAsync();
-            //AllRequests = allRequests ?? new List<Request>();
+            Task.Run(() =>
+            {
+                UserInfo = DependencyService.Resolve<IAuthService>().GetUserAsync(1).Result;
+            });
         }
 
         protected override void OnSleep()

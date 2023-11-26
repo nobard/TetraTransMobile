@@ -1,23 +1,20 @@
-﻿using PricesAndroid.ViewModels;
-using PricesAndroid.Views;
+﻿using PricesAndroid.Views;
 using Xamarin.Forms;
 
 namespace PricesAndroid.Utilities.RouteFactories
 {
     public class MainPageRouteFactory : RouteFactory
     {
-        private readonly MainViewModel viewModel;
+        private readonly MainPage page;
 
-        public MainPageRouteFactory(MainViewModel vm)
+        public MainPageRouteFactory(MainPage page)
         {
-            viewModel = vm;
+            this.page = page;
         }
 
         public override Element GetOrCreate()
         {
-            var elem = new MainPage(viewModel);
-
-            return elem;
+            return page;
         }
     }
 }
